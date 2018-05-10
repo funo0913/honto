@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  book_id: one
+  status_id: one
+  title: MyString
+  innocent_review: MyText
+  review: MyText
+  private: false
+  warning: false
+
+two:
+  user_id: two
+  book_id: two
+  status_id: two
+  title: MyString
+  innocent_review: MyText
+  review: MyText
+  private: false
+  warning: false

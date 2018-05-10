@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @review.user.nickname %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @review.book.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @review.status.status_name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @review.title %>
+</p>
+
+<p>
+  <strong>Innocent review:</strong>
+  <%= @review.innocent_review %>
+</p>
+
+<p>
+  <strong>Review:</strong>
+  <%= @review.review %>
+</p>
+
+<p>
+  <strong>Private:</strong>
+  <%= @review.private %>
+</p>
+
+<p>
+  <strong>Warning:</strong>
+  <%= @review.warning %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

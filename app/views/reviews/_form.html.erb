@@ -1,0 +1,57 @@
+<%= form_with(model: review, local: true) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :review_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <%= form.text_field :book_id, id: :review_book_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status_id %>
+    <%= form.text_field :status_id, id: :review_status_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :review_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :innocent_review %>
+    <%= form.text_area :innocent_review, id: :review_innocent_review %>
+  </div>
+
+  <div class="field">
+    <%= form.label :review %>
+    <%= form.text_area :review, id: :review_review %>
+  </div>
+
+  <div class="field">
+    <%= form.label :private %>
+    <%= form.check_box :private, id: :review_private %>
+  </div>
+
+  <div class="field">
+    <%= form.label :warning %>
+    <%= form.check_box :warning, id: :review_warning %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Status.create(:status_name => '未読')
+Status.create(:status_name => '読み途中')
+Status.create(:status_name => '既読')

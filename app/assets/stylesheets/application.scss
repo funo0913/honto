@@ -15,3 +15,28 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+html,body{
+  height: 100%;
+}
+a,a:hover,a:visited{
+  text-decoration: none;
+}
+
+.center{
+  text-align: center;
+}
+
+.top-image{
+  background-image:  url(/assets/top_image.jpeg);
+  background-position: right;
+  background-color: #ccc;
+  height: 300px;
+}
+
+footer{
+  background-color: #07617d;
+  color:#fff;
+  height: 250px;
+  padding:50px;
+}

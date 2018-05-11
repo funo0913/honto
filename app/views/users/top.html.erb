@@ -9,21 +9,79 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-12 top-image">
-          
+        <div class="col-lg-12">
+          <div class="top-image">
+            <div class="top-logo">
+              <%= image_tag 'logo_at_white.png',:width => "200" %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <%= link_to "サインイン", new_user_session_path, class:"btn"%>
-          <%= link_to "サインアップ", new_user_registration_path, class:"btn"%>
+          <div class="top-menu">
+            <%= link_to "login", new_user_session_path, class:"btn signin-btn"%>
+            <%= link_to "signup", new_user_registration_path, class:"btn signup-btn"%>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="top-introduction">
+            <h4>honto でできること</h4>
+            <div class="row intro-subject">
+              <div class="col-lg-4 intro-image">
+                <%= image_tag 'books_white.png', :width => '150' %>
+              </div>
+              <div class="col-lg-8 intro-text">
+                <h5>　読書記録として　</h5>
+                日々の読書を記録しましょう<br>
+                これまで読んできた本を積み上げて<br>
+                達成感に浸るのだってありです
+              </div>
+            </div>
+            <div class="intro-subject">
+              <div class="col-lg-8 intro-text">
+                <h5>　感想を熱く語りたい　</h5>
+                読み終えた後の気持ちを残しましょう<br>
+                他の既読ユーザーの感想に「分かる」「そうそう」などの<br>
+                リアクションを残して共感を伝えることも
+              </div>
+              <div class="col-lg-4 intro-image">
+                <%= image_tag 'in_review_white.png', :width => '150' %>
+              </div>
+            </div>
+            <div class="intro-subject">
+              <div class="col-lg-4 intro-image">
+                <%= image_tag 'bookshelf_2_white.png', :width => '150' %>
+              </div>
+              <div class="col-lg-8 intro-text">
+                <h5>　次に読む本探しに　</h5>
+                感想は知りたいけどネタばれはご免、という人へ<br>
+                おすすめするための感想は別に作れます<br>
+                自分と似た読書趣味のユーザの感想をチェック
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <footer>
         <%= render 'layouts/footer' %>
       </footer>
     </div>
+    <script>
+$(function() {
+	$('.intro-subject').on('inview', function(event, isInView, visiblePartX, visiblePartY) {
+		if(isInView){
+			$(this).stop().addClass('inview');
+		}
+		else{
+			$(this).stop().removeClass('inview');
+		}
+	});
+});
+</script>
   </body>
 </html>

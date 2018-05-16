@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(version: 20180510102844) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "nickname", null: false
-    t.integer "css_id_id"
+    t.integer "css_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["css_id_id"], name: "index_users_on_css_id_id"
+    t.index ["css_id"], name: "index_users_on_css_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -18,6 +18,7 @@
 
 $dark-grean: #07617d;
 $orrange:#f9a828;
+$light-orrange:#ffe2b5;
 $gray:#ececeb;
 
 @font-face {
@@ -28,7 +29,7 @@ $gray:#ececeb;
   font-family: 'NotoSansCJKjp-Light';
   src: font-url("NotoSansCJKjp-Light.otf");
 }
-@import url(https://fonts.googleapis.com/earlyaccess/sawarabigothic.css);
+
 html,body,p{
   height: 100%;
   font-family: Mitr,'Sawarabi Gothic';
@@ -40,7 +41,12 @@ a,a:hover,a:visited{
 .center{
   text-align: center;
 }
-
+div.alert{
+  padding:3px 10px;
+  margin:3px 5px;
+  color: $orrange;
+  background-color: $light-orrange;
+}
 header{
   background-color: $dark-grean;
   color: #fff;
@@ -99,7 +105,7 @@ footer{
   border-radius: 5px;
   margin-top: 120px;
   margin-bottom: 120px;
-  
+
   // invew
   opacity: 0;
   -moz-transition: -moz-transform 0.5s linear;

@@ -2,6 +2,14 @@
 
 <h1>Reviews</h1>
 
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+
+<%= form_for(@book,url: books_search_path) do |f| %>
+  <%= f.text_field :search_word %>
+  <%= f.submit 'getbook' %>
+<% end %>
 <table>
   <thead>
     <tr>

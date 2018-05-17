@@ -16,4 +16,6 @@
 //= require jquery.inview
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require masonry/masonry.min
+//= require imagesloaded
 //= require_tree .

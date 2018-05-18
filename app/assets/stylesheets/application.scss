@@ -40,6 +40,9 @@ html,body,p{
 a,a:hover,a:visited{
   text-decoration: none;
 }
+a:hover{
+  background-color: #fff !important;
+}
 li{
   list-style: none;
 }
@@ -186,7 +189,15 @@ footer{
   padding-top:20px;
   height: 100%;
 }
-
+//////////////////
+//kaminari
+//////////////////
+.pagenation{
+  span > a:hover{
+    background-color: #fff;
+    color: $orrange;
+  }
+}
 //////////////////
 // menu
 //////////////////

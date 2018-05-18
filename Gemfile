@@ -62,3 +62,4 @@ gem 'kaminari'
 gem 'ransack'
 gem 'masonry-rails'
 gem 'imagesLoaded_rails'
+gem "font-awesome-rails"

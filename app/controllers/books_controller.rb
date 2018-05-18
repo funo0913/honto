@@ -6,7 +6,6 @@ class BooksController < ApplicationController
 
   # 何もしない?
   def index
-    # @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
   end
 
   #apiでの書籍検索
@@ -33,6 +32,7 @@ class BooksController < ApplicationController
   #戻りはbookの配列
   #:TODO 作者検索は関連性の高いものを絞っているが、作品名検索などをした場合関連性の低いものも該当してしまう
   #      出版日の書式が不統一・無いものも存在するためかソートに失敗する場合がある
+  #      できれば捨てたい
   def get_bookinfos_from_google(search_word)
 
     uri = URI.parse("#{BASE_API_URL}?#{search_word}&maxResults=#{MAX_RESULTS}&country=JP&printType=books")
@@ -87,8 +87,12 @@ class BooksController < ApplicationController
       # 例外が起きたら並び替えを諦める…:TODO
     end
     @book = Book.new
-    books
+    return books
   end
+
+  #------------------------------------
+  # googlebooksapiができてないところの補助…
+  #------------------------------------
 
   #ISBNの取得
   #ISBN_13を優先する

@@ -17,5 +17,6 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require masonry/masonry.min
+//= require infinite-scroll.pkgd
 //= require imagesloaded
 //= require_tree .

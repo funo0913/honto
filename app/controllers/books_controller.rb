@@ -2,15 +2,15 @@ class BooksController < ApplicationController
   require 'net/http'
   BASE_API_URL = "https://www.googleapis.com/books/v1/volumes".freeze
   UNREGISTERED = "未登録".freeze
-  MAX_RESULTS = 20.freeze
+  MAX_RESULTS = 40.freeze
 
-  # 何もしない
+  # 何もしない?
   def index
-
+    # @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
   end
 
   #apiでの書籍検索
-  def search_api
+  def search
     @search_word = params[:book][:search_word]
     if @search_word.empty?
       redirect_to reviews_path, alert: '検索キーワードを入力してください'
@@ -23,13 +23,16 @@ class BooksController < ApplicationController
       #他のapiに対応できたら検討する
       @books = Book.new
     end
-    render "books/index"
+    @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
+    # render "books/index"
   end
 
   private
 
   #google books api 利用時
   #戻りはbookの配列
+  #:TODO 作者検索は関連性の高いものを絞っているが、作品名検索などをした場合関連性の低いものも該当してしまう
+  #      出版日の書式が不統一・無いものも存在するためかソートに失敗する場合がある
   def get_bookinfos_from_google(search_word)
 
     uri = URI.parse("#{BASE_API_URL}?#{search_word}&maxResults=#{MAX_RESULTS}&country=JP&printType=books")
@@ -78,9 +81,11 @@ class BooksController < ApplicationController
       )
       books << book
     end
-    debugger
-    books.sort!{|a,b|b[:publication] <=> a[:publication]}
-
+    begin
+      books.sort!{|a,b|b[:publication] <=> a[:publication]}
+    rescue
+      # 例外が起きたら並び替えを諦める…:TODO
+    end
     @book = Book.new
     books
   end
@@ -131,19 +136,27 @@ class BooksController < ApplicationController
     end
     authors
   end
+
   #出版日の取得
   def get_publication_from_google(item)
+    # publishDateがなければnil
+    date = nil
     if item['volumeInfo'].has_key?('publishedDate')
-      if item['volumeInfo']['publishedDate'].length == 4
-        item['volumeInfo']['publishedDate'] += '-01-01'
-      elsif item['volumeInfo']['publishedDate'].length < 10
-        item['volumeInfo']['publishedDate'] += '-01'
+      datestr = item['volumeInfo']['publishedDate']
+      begin
+        date = Datetime.parse(datestr).to_s
+      rescue
+        formats = ['%Y-%m-%d','%Y-%m','%Y']
+        formats.each do |format|
+          begin
+            date = DateTime.strptime(datestr, format)
+            break
+          rescue
+          end
+        end
       end
-      date = item['volumeInfo']['publishedDate'].to_datetime
-    else
-      date = nil
     end
-    date
+   date
   end
 
   #TODO:amazonの書籍検索apiが使えたら検討する

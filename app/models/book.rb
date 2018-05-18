@@ -4,4 +4,5 @@ class Book < ApplicationRecord
 
   attr_accessor :search_word
   attr_accessor :thumbnail
+  paginates_per 10
 end

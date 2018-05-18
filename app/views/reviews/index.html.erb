@@ -1,7 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Reviews</h1>
-
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
 <table>
   <thead>
     <tr>

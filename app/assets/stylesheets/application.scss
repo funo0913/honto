@@ -12,12 +12,16 @@
  *
  *= require_tree .
  *= require_self
+ *= require 'masonry/basic'
+ *= require 'masonry/centered'
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
 $dark-grean: #07617d;
+$light-grean: #f4f4f4;
 $orrange:#f9a828;
+$light-orrange:#ffe2b5;
 $gray:#ececeb;
 
 @font-face {
@@ -28,7 +32,7 @@ $gray:#ececeb;
   font-family: 'NotoSansCJKjp-Light';
   src: font-url("NotoSansCJKjp-Light.otf");
 }
-@import url(https://fonts.googleapis.com/earlyaccess/sawarabigothic.css);
+
 html,body,p{
   height: 100%;
   font-family: Mitr,'Sawarabi Gothic';
@@ -36,11 +40,21 @@ html,body,p{
 a,a:hover,a:visited{
   text-decoration: none;
 }
-
+a:hover{
+  background-color: #fff !important;
+}
+li{
+  list-style: none;
+}
 .center{
   text-align: center;
 }
-
+div.alert{
+  padding:3px 10px;
+  margin:3px 5px;
+  color: $orrange;
+  background-color: $light-orrange;
+}
 header{
   background-color: $dark-grean;
   color: #fff;
@@ -56,8 +70,9 @@ footer{
   height: 250px;
   padding:30px;
 }
-
+//////////////////
 // LP画面
+//////////////////
 .top-image{
   background: url(/assets/top_image.jpeg) no-repeat right;
   background-size: auto 400px;
@@ -95,12 +110,13 @@ footer{
   height: 200px;
   width: 80%;
   margin: 0 auto;
-  // border: solid 1px $orrange;
   border-radius: 5px;
   margin-top: 120px;
   margin-bottom: 120px;
-  
+
+  //------------------
   // invew
+  //------------------
   opacity: 0;
   -moz-transition: -moz-transform 0.5s linear;
   -webkit-transition: -webkit-transform 0.5s linear;
@@ -172,4 +188,59 @@ footer{
   text-align: center;
   padding-top:20px;
   height: 100%;
+}
+//////////////////
+//kaminari
+//////////////////
+.pagenation{
+  span > a:hover{
+    background-color: #fff;
+    color: $orrange;
+  }
+}
+//////////////////
+// menu
+//////////////////
+.menu{
+  height: 50px;
+  background-color: $orrange;
+  width: 100%;
+  padding-top: 10px;
+}
+
+//////////////////
+// 書籍検索タイル表示
+//////////////////
+#box {
+  width: 100%;
+  margin: 0 auto;   /*中央寄せ*/
+  position: relative;
+}
+.book {
+  margin-bottom:10px;
+  background-color: $light-grean;
+  border-radius: 5px;
+  // border:solid 1px $light-grean;
+  width: 220px;
+}
+.book-info{
+  margin: 10px;
+  height: 300px;
+}
+.title{
+  font-size: 16px;
+}
+.detail{
+  font-size: 11px;
+}
+.book-image-col{
+  width: 80px;
+}
+.book-info-col{
+  margin:10px 0 0 0;
+  float: left;
+  p{
+    color: $dark-grean;
+    margin:5px;
+  }
 }

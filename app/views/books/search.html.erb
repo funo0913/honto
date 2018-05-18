@@ -2,21 +2,33 @@
 
 <div id="box">
   <% @books.each do |book| %>
-    <div class="book">
-      <div class="book-info">
-        <div class="book-image-col"><%= image_tag book.thumbnail,:width => "100" %></div>
-        <div class="book-info-col">
-          <p class="title"><%= book.title.truncate(17) %></p>
-          <p>【著者】　<%= book.author.truncate(20) %></p>
-          <p class="detail">【出版】　<%= book.publication.strftime("%Y/%m") if !book.publication.nil?  %></p>
-          <p class="detail">【出版社】<%= book.publisher.truncate(20) %></p>
-          <p class="detail">【ISBN】　<%= book.isbn %></p>
+    <%= link_to books_edit_path(title: book.title,
+                                tmp_id: book.tmp_id,
+                                author: book.author,
+                                publisher: book.publisher,
+                                publication: book.publication,
+                                isbn: book.isbn),remote: true do %>
+      <div class="book">
+        <div class="book-info">
+          <div class="book-image-col"><%= image_tag book.thumbnail,:width => "100" %></div>
+          <div class="book-info-col">
+            <p class="title"><%= book.title.truncate(17) %></p>
+            <p>【著者】　<%= book.author.truncate(20) %></p>
+            <p class="detail">【出版】　<%= book.publication.strftime("%Y/%m") if !book.publication.nil?  %></p>
+            <p class="detail">【出版社】<%= book.publisher.truncate(20) %></p>
+            <p class="detail">【ISBN】　<%= book.isbn %></p>
+            <%= hidden_field_tag 'title',book.title %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 <%= paginate @books %>
+<!-- モーダルウィンドウ -->
+<div id="book-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+</div>
+
 <script>
 // mazonryの設定
 var $container = $('#box');

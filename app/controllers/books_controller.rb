@@ -23,10 +23,33 @@ class BooksController < ApplicationController
       @books = Book.new
     end
     @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
-    # render "books/index"
+  end
+
+  def edit
+    # 読書感想の有無を判定する
+    target_book = Book.find_by(tmp_id: params[:tmp_id])
+    @is_reviewed = false
+    if !target_book.nil?
+      @is_reviewed = Review.exists?(book_id: target_book.id)
+    end
+    uri = URI.parse("#{BASE_API_URL}?q=id:#{params[:tmp_id]}")
+    result = get_bookinfo_from_google_core(uri)
+
+    @book_description = result['items'][0]['volumeInfo'].has_key?('description')? result['items'][0]['volumeInfo']['description'] : UNREGISTERED
+    @book = Book.new(
+      isbn: params[:isbn],
+      title: params[:title],
+      author: params[:author],
+      publication: params[:publication],
+      publisher: params[:publisher]
+    )
   end
 
   private
+  def books_params
+    params.require(:book).permit(:title,:tmp_id)
+  end
+
 
   #google books api 利用時
   #戻りはbookの配列
@@ -35,8 +58,33 @@ class BooksController < ApplicationController
   #      できれば捨てたい
   def get_bookinfos_from_google(search_word)
 
-    uri = URI.parse("#{BASE_API_URL}?#{search_word}&maxResults=#{MAX_RESULTS}&country=JP&printType=books")
+    uri = URI.parse("#{BASE_API_URL}?#{search_word}&maxResults=#{MAX_RESULTS}&printType=books")
+    result = get_bookinfo_from_google_core(uri)
 
+    #google books apiで取得する
+    books = []
+    result['items'].each do |item|
+      book = Book.new(
+        isbn: get_isbn_from_google(item),
+        title: item['volumeInfo']['title'],
+        author: get_authers_from_google(item),
+        publication: get_publication_from_google(item),
+        publisher: get_publisher_from_google(item),
+        thumbnail: get_thumbnail_from_google(item),
+        tmp_id: item['id']
+      )
+      books << book
+    end
+    begin
+      books.sort!{|a,b|b[:publication] <=> a[:publication]}
+    rescue
+      # 例外が起きたら並び替えを諦める…:TODO
+    end
+    @book = Book.new
+    return books
+  end
+
+  def get_bookinfo_from_google_core(uri)
     begin
       #httpセッションの開始
       response = Net::HTTP.start(uri.host, uri.port) do |http|
@@ -53,41 +101,13 @@ class BooksController < ApplicationController
       end
     #例外処理 TBD
     rescue TimeoutError => e
-      @logger.error(e.message)
       redirect_to reviews_path, alert: '情報の取得に失敗しました'
       return
     rescue => e
-      @logger.error(e.message)
       redirect_to reviews_path, alert: '情報の取得に失敗しました'
       return
     end
-
-    #google books apiで取得する
-    books = []
-    result['items'].each do |item|
-
-      isbn = get_isbn_from_google(item)
-      authors = get_authers_from_google(item)
-      publication = get_publication_from_google(item)
-      publisher = get_publisher_from_google(item)
-      thumbnail = get_thumbnail_from_google(item)
-      book = Book.new(
-        isbn: isbn,
-        title: item['volumeInfo']['title'],
-        author: authors,
-        publication: publication,
-        publisher: publisher,
-        thumbnail: thumbnail
-      )
-      books << book
-    end
-    begin
-      books.sort!{|a,b|b[:publication] <=> a[:publication]}
-    rescue
-      # 例外が起きたら並び替えを諦める…:TODO
-    end
-    @book = Book.new
-    return books
+    return result
   end
 
   #------------------------------------

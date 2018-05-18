@@ -1,0 +1,39 @@
+<div class="select-book">
+  <div class="modal-header">
+    <h4><%= @book.title %></h4>
+  </div>
+  <div class="desctiption">
+    <table class="table description-tbl">
+      <tr>
+        <td class="subject-col">著者</td>
+        <td class="contents-col"><%= @book.author %></td>
+      </tr>
+      <tr>
+        <td class="subject-col">出版社</td>
+        <td class="contents-col"><%= @book.publisher %></td>
+      </tr>
+      <tr>
+        <td class="subject-col">出版日</td>
+        <td class="contents-col"><%= @book.publication.strftime("%Y/%m") if !@book.publication.nil? %></td>
+      </tr>
+      <tr>
+        <td class="subject-col">ISBN</td>
+        <td class="contents-col"><%= @book.isbn %></td>
+      </tr>
+      <tr>
+        <td class="subject-col">紹介文</td>
+        <td class="contents-col"><%= @book_description %></td>
+      </tr>
+    </table>
+    <div class="select-book-action center">
+      <!-- 本を本棚に追加する -->
+      <%= link_to '本棚に追加する', '#', class: 'btn btn-primary btn-wide' %>
+      <!-- 読書の感想を探す -->
+      <% if @is_reviewed %>
+        <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide'%>
+      <% else %>
+        <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide', :disabled => true %>
+      <% end %>
+    </div>
+  </div>
+</div>

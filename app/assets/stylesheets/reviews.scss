@@ -1,3 +1,36 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$dark-grean: #07617d;
+$light-grean: #f4f4f4;
+$orrange:#f9a828;
+$light-orrange:#ffe2b5;
+$gray:#ececeb;
+
+.review {
+  margin-bottom:10px;
+  background-color: $light-grean;
+  border-radius: 5px;
+  width: 220px;
+}
+.review-info{
+  margin: 10px;
+  height: 250px;
+}
+.title{
+  font-size: 16px;
+}
+.detail{
+  font-size: 11px;
+}
+.review-image-col{
+  width: 80px;
+}
+.review-info-col{
+  margin:10px 0 0 0;
+  float: left;
+  p{
+    color: $dark-grean;
+    margin:5px;
+  }
+}

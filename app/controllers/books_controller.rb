@@ -22,6 +22,7 @@ class BooksController < ApplicationController
       #他のapiに対応できたら検討する
       @books = Book.new
     end
+    @search_book = Book.new
     @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
   end
 

@@ -23,12 +23,17 @@
       </header>
       <main>
         <div class="menu">
-          <div class="col-lg-9">
-          </div>
-          <div class="col-lg-3">
-            <%= form_for(@book,url: books_search_path, method: 'get') do |f| %>
-              <%= f.text_field :search_word %>
-              <%= f.submit 'getbook' %>
+          <div class="row">
+            <% if user_signed_in? %>
+            <div class="col-lg-9">
+              <%= link_to '　Sign out',destroy_user_session_path, method: :delete %>
+            </div>
+            <div class="col-lg-3">
+              <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
+                <%= f.text_field :search_word %>
+                <%= f.submit 'getbook' %>
+              <% end %>
+            </div>
             <% end %>
           </div>
         </div>

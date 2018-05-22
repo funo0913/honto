@@ -18,10 +18,11 @@ Rails.application.routes.draw do
 
   get 'warning_report/create'
 
-  get 'books/index'
   get 'books/search', to: 'books#search'
-  # get 'books/search', to: 'books#search'
+  resources :books
 
+  get 'reviews/add_bookshelf:id', to: 'reviews#add_bookshelf'
+  get 'reviews/index_my_bookshelf', to: 'reviews#index_my_bookshelf', as: 'my_bookshelf'
   resources :reviews
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

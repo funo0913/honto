@@ -1,4 +1,4 @@
-<h3>new arrivals</h3>
+<h3>my bookshelf</h3>
 
 <div id="box">
   <% @reviews.each do |review| %>
@@ -12,7 +12,6 @@
             <p class="detail">【出版社】<%= review.book.publisher.truncate(20) %></p>
             <p class="detail">【ISBN】　<%= review.book.isbn %></p>
             <p> 状況　<%= review.status.status_name %></p>
-            <p> ニックネーム　<%= review.user.nickname %></p>
           </div>
         </div>
       </div>

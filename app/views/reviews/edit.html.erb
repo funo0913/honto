@@ -1,6 +1,15 @@
-<h1>Editing Review</h1>
-
-<%= render 'form', review: @review %>
-
-<%= link_to 'Show', @review %> |
-<%= link_to 'Back', reviews_path %>
+<%=  flash[:isAdded]  %>
+<div class="row">
+  <div class="col-lg-12">
+    たいとる
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    読書状況と感想、読書状況の更新
+  </div>
+</div>
+<div class="row">
+    <%= link_to '本棚から削除する', '#', class: 'btn' %>
+    <%= link_to '本棚に戻る', my_bookshelf_path, class: 'btn' %>
+</div>

@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
 
   # 感想の詳細表示
   def show
+    @book = Book.new
   end
 
   # 使わないかもしれない
@@ -22,19 +23,19 @@ class ReviewsController < ApplicationController
 
   # 本を本棚に追加する
   #bookに情報がなければBookを新規登録する
-  def create
+  def add_bookshelf
     debugger
-    @review = Review.new(review_params)
+    review = Review.new(
+      user_id: current_user.id,
+      book_id: params[:id],
+      status_id: 1,
+      title: '',
+      innocent_review: '',
+      review: ''
+    )
+    review.save
+    redirect_to action: :show,id: review.id
 
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # 感想の編集・更新

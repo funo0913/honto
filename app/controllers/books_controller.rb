@@ -26,14 +26,13 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.find_by(:tmp_id => params[:book][:tmp_id])
+    book = Book.find_by(:tmp_id => books_params[:tmp_id])
     if book.nil?
       #bookマスターに存在しないのであれば作成する
-      debugger
-      book = Book.new(params[:book])
+      book = Book.new(books_params)
       book.save
     end
-    redirect_to reviews_path(book.id)
+    redirect_to controller: :reviews, action: :add_bookshelf ,id: book.id
   end
 
   def show
@@ -43,15 +42,7 @@ class BooksController < ApplicationController
     if !target_book.nil?
       @is_reviewed = Review.exists?(book_id: target_book.id)
     end
-    @book = Book.new(
-      isbn: params[:isbn],
-      title: params[:title],
-      author: params[:author],
-      publication: params[:publication],
-      publisher: params[:publisher],
-      tmp_id: params[:tmp_id],
-      description: params[:description]
-    )
+    @book = Book.hash_inititalize(params)
   end
 
   private

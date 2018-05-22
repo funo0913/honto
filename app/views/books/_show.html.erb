@@ -1,45 +1,51 @@
 <div class="select-book">
+  <%= form_for(@book) do |f| %>
   <div class="modal-header">
     <h4><%= @book.title %></h4>
+    <%= f.hidden_field :title ,:value => params[:title] %>
   </div>
   <div class="desctiption">
     <table class="table description-tbl">
       <tr>
         <td class="subject-col">著者</td>
-        <td class="contents-col"><%= @book.author %></td>
+        <td class="contents-col">
+          <%= @book.author %>
+          <%= f.hidden_field :author ,:value => params[:author] %>
+        </td>
       </tr>
       <tr>
         <td class="subject-col">出版社</td>
-        <td class="contents-col"><%= @book.publisher %></td>
+        <td class="contents-col">
+          <%= @book.publisher %>
+        <%= f.hidden_field :publisher ,:value => params[:publisher] %>
+      </td>
       </tr>
       <tr>
         <td class="subject-col">出版日</td>
-        <td class="contents-col"><%= @book.publication.strftime("%Y/%m") if !@book.publication.nil? %></td>
+        <td class="contents-col">
+          <%= @book.publication.strftime("%Y/%m") if !@book.publication.nil? %>
+          <%= f.hidden_field :publication ,:value => params[:publication] %>
+        </td>
       </tr>
       <tr>
         <td class="subject-col">ISBN</td>
-        <td class="contents-col"><%= @book.isbn %></td>
+        <td class="contents-col">
+          <%= @book.isbn %>
+          <%= f.hidden_field :isbn ,:value => params[:isbn] %>
+        </td>
       </tr>
       <tr>
         <td class="subject-col">紹介文</td>
-        <td class="contents-col"><%= @book.description %></td>
+        <td class="contents-col">
+          <%= @book.description %>
+          <%= f.hidden_field :description ,:value => params[:description] %>
+        </td>
       </tr>
     </table>
-    <%= hidden_field_tag 'tmp_id',@book.tmp_id %>
+    <%= f.hidden_field :tmp_id, :value => params[:tmp_id] %>
     <div class="select-book-action center">
       <!-- 本を本棚に追加する -->
-      <%
-        book = {
-                :title => @book.title,
-                :tmp_id => @book.tmp_id,
-                :author => @book.author,
-                :publisher => @book.publisher,
-                :publication => @book.publication,
-                :isbn => @book.isbn,
-                :description => @book.description
-              }
-       %>
-      <%= link_to '本棚に追加する', books_path(:book => book),method:'post', class: 'btn btn-primary btn-wide' %>
+      <%= f.submit '本棚に追加する',method:'post', class: 'btn btn-primary btn-wide' %>
       <!-- 読書の感想を探す -->
       <% if @is_reviewed %>
         <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide'%>
@@ -48,4 +54,5 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 </div>

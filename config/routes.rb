@@ -19,10 +19,9 @@ Rails.application.routes.draw do
   get 'warning_report/create'
 
   get 'books/search', to: 'books#search'
-  # get 'books/show', to: 'books#show'
-  # post 'books/create', to: 'books#create'
   resources :books
 
+  get 'reviews/add_bookshelf:id', to: 'reviews#add_bookshelf'
   resources :reviews
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

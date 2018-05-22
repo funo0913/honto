@@ -25,29 +25,45 @@ class BooksController < ApplicationController
     @books = Kaminari.paginate_array(@books).page(params[:page]).per(10)
   end
 
-  def edit
+  def create
+    book = Book.find_by(:tmp_id => params[:book][:tmp_id])
+    if book.nil?
+      #bookマスターに存在しないのであれば作成する
+      debugger
+      book = Book.new(params[:book])
+      book.save
+    end
+    redirect_to reviews_path(book.id)
+  end
+
+  def show
     # 読書感想の有無を判定する
     target_book = Book.find_by(tmp_id: params[:tmp_id])
     @is_reviewed = false
     if !target_book.nil?
       @is_reviewed = Review.exists?(book_id: target_book.id)
     end
-    uri = URI.parse("#{BASE_API_URL}?q=id:#{params[:tmp_id]}")
-    result = get_bookinfo_from_google_core(uri)
-
-    @book_description = result['items'][0]['volumeInfo'].has_key?('description')? result['items'][0]['volumeInfo']['description'] : UNREGISTERED
     @book = Book.new(
       isbn: params[:isbn],
       title: params[:title],
       author: params[:author],
       publication: params[:publication],
-      publisher: params[:publisher]
+      publisher: params[:publisher],
+      tmp_id: params[:tmp_id],
+      description: params[:description]
     )
   end
 
   private
   def books_params
-    params.require(:book).permit(:title,:tmp_id)
+    params.require(:book).permit(:isbn,
+                                :title,
+                                :author,
+                                :publication,
+                                :publisher,
+                                :tmp_id,
+                                :description
+                              )
   end
 
 
@@ -71,7 +87,8 @@ class BooksController < ApplicationController
         publication: get_publication_from_google(item),
         publisher: get_publisher_from_google(item),
         thumbnail: get_thumbnail_from_google(item),
-        tmp_id: item['id']
+        tmp_id: item['id'],
+        description: get_description_from_google(item)
       )
       books << book
     end
@@ -140,10 +157,16 @@ class BooksController < ApplicationController
   #情報がない場合は未登録とする
   def get_publisher_from_google(item)
     publisher = item['volumeInfo'].has_key?('publisher') ? item['volumeInfo']['publisher'] : UNREGISTERED
+    return publisher
   end
+
+  #サムネイルの取得
+  #サムネイルがない場合はnoimageを表示する
   def get_thumbnail_from_google(item)
     image = item['volumeInfo'].has_key?('imageLinks') ? item['volumeInfo']['imageLinks']['smallThumbnail'] : 'no_image.png'
+    return image
   end
+
   #著者の取得
   def get_authers_from_google(item)
     authors = ""
@@ -158,7 +181,7 @@ class BooksController < ApplicationController
     else
       authors = item['volumeInfo']['authors'][0]
     end
-    authors
+    return authors
   end
 
   #出版日の取得
@@ -180,9 +203,14 @@ class BooksController < ApplicationController
         end
       end
     end
-   date
+    return date
   end
 
+  #説明文の取得
+  def get_description_from_google(item)
+    description = item['volumeInfo'].has_key?('description')? item['volumeInfo']['description'] : UNREGISTERED
+    return description
+  end
   #TODO:amazonの書籍検索apiが使えたら検討する
 
 end

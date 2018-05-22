@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get 'warning_report/create'
 
   get 'books/search', to: 'books#search'
-  get 'books/edit', to: 'books#edit'
+  # get 'books/show', to: 'books#show'
+  # post 'books/create', to: 'books#create'
+  resources :books
 
   resources :reviews
 

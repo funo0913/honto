@@ -22,12 +22,24 @@
       </tr>
       <tr>
         <td class="subject-col">紹介文</td>
-        <td class="contents-col"><%= @book_description %></td>
+        <td class="contents-col"><%= @book.description %></td>
       </tr>
     </table>
+    <%= hidden_field_tag 'tmp_id',@book.tmp_id %>
     <div class="select-book-action center">
       <!-- 本を本棚に追加する -->
-      <%= link_to '本棚に追加する', '#', class: 'btn btn-primary btn-wide' %>
+      <%
+        book = {
+                :title => @book.title,
+                :tmp_id => @book.tmp_id,
+                :author => @book.author,
+                :publisher => @book.publisher,
+                :publication => @book.publication,
+                :isbn => @book.isbn,
+                :description => @book.description
+              }
+       %>
+      <%= link_to '本棚に追加する', books_path(:book => book),method:'post', class: 'btn btn-primary btn-wide' %>
       <!-- 読書の感想を探す -->
       <% if @is_reviewed %>
         <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide'%>

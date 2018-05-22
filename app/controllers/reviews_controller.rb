@@ -1,30 +1,29 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
-  # GET /reviews
-  # GET /reviews.json
+  # 感想の新着一覧表示
   def index
     @reviews = Review.all
     @book = Book.new
   end
 
-  # GET /reviews/1
-  # GET /reviews/1.json
+  # 感想の詳細表示
   def show
   end
 
-  # GET /reviews/new
+  # 使わないかもしれない
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
+  # 感想の編集・更新
   def edit
   end
 
-  # POST /reviews
-  # POST /reviews.json
+  # 本を本棚に追加する
+  #bookに情報がなければBookを新規登録する
   def create
+    debugger
     @review = Review.new(review_params)
 
     respond_to do |format|
@@ -38,8 +37,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
+  # 感想の編集・更新
   def update
     respond_to do |format|
       if @review.update(review_params)
@@ -52,8 +50,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
+  # 感想の破棄
   def destroy
     @review.destroy
     respond_to do |format|
@@ -70,6 +67,14 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:user_id_id, :book_id_id, :status_id_id, :title, :innocent_review, :review, :private, :warning)
+      params.require(:review).permit(:user_id,
+                                     :book_id,
+                                     :status_id,
+                                     :title,
+                                     :innocent_review,
+                                     :review,
+                                     :private,
+                                     :warning
+                                   )
     end
 end

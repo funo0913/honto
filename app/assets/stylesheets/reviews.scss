@@ -31,7 +31,11 @@ $gray:#ececeb;
   float: left;
   p{
     color: $dark-grean;
-    margin:5px;
+    margin:3px;
+  }
+  h5{
+    font-weight: bold;
+    color: $dark-grean;
   }
 }
 
@@ -79,4 +83,10 @@ $gray:#ececeb;
 .review-radio-label{
   font-weight: normal;
   margin-right: 10px;
+}
+.unreaded{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: $gray;
 }

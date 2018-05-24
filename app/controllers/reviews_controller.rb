@@ -3,8 +3,10 @@ class ReviewsController < ApplicationController
 
   # 感想の新着一覧表示(最新２０件)
   def index
-    @reviews = Review.all
-    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    @reviews = Review.where(status_id: 3)
+    if !@reviews.nil?
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    end
     @search_book = Book.new
   end
 
@@ -14,9 +16,33 @@ class ReviewsController < ApplicationController
     @search_book = Book.new
   end
 
+  # 書籍検索結果からの感想一覧表示
+  def index_search_review
+    book = Book.find_by(tmp_id: params[:id])
+    @reviews = Review.where(book_id: book.id).where(status_id: 3).page(params[:page]).per(10)
+    @search_book = Book.new
+  end
+
   # 感想の詳細表示
   def show
     @review = Review.find(params[:id])
+    # 自分の感想か、他人の感想か？
+    if @review.user_id == current_user.id
+      #自分の感想
+    else
+      mine_reviews = Review.where(user_id: current_user.id).where(book_id: @review.book.id)
+      if mine_reviews.count < 1
+        @added = false
+      else
+        @added = true
+        if mine_reviews.status_id == 3
+          @readed = true
+        else
+          @readed = false
+        end
+      end
+    end
+
     @search_book = Book.new
     @statuses = Status.all
   end

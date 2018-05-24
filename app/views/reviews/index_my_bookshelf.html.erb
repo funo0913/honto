@@ -2,7 +2,7 @@
 
 <div id="box">
   <% @reviews.each do |review| %>
-    <%= link_to '#' do %>
+    <%= link_to  review_path(review.id) do %>
       <div class="review">
         <div class="review-info">
           <div class="review-info-col">

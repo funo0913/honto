@@ -41,7 +41,7 @@ class BooksController < ApplicationController
     target_book = Book.find_by(tmp_id: params[:tmp_id])
     @is_reviewed = false
     if !target_book.nil?
-      @is_reviewed = Review.exists?(book_id: target_book.id)
+      @is_reviewed = Review.exists?(book_id: target_book.id, status_id: 3)
     end
     @book = Book.hash_inititalize(params)
   end

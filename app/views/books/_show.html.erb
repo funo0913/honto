@@ -48,7 +48,7 @@
       <%= f.submit '本棚に追加する',method:'post', class: 'btn btn-primary btn-wide' %>
       <!-- 読書の感想を探す -->
       <% if @is_reviewed %>
-        <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide'%>
+        <%= link_to '感想を見る', search_review_path(params[:tmp_id]),class: 'btn btn-primary btn-wide'%>
       <% else %>
         <%= link_to '感想を見る', '#',class: 'btn btn-primary btn-wide', :disabled => true %>
       <% end %>

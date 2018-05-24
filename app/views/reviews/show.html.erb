@@ -3,7 +3,7 @@
     <div class="review-title">
     </div>
     <div class="review-header">
-      書籍情報
+      <%= image_tag 'book_white.png', :width => '20' %>　書籍情報
     </div>
     <div class="review-body">
       <h4><%= @review.book.title %></h4>
@@ -39,16 +39,25 @@
       <%= @review.title %>
     </div>
     <div class="review-header">
-      ねたばれなし
+      <%= image_tag 'in_review_white.png', :width => '20' %>　ねたばれなし
     </div>
     <div class="review-body">
-      <%= @review.innocent_review %>
+      <%= simple_format(h(@review.innocent_review)) %>
     </div>
     <div class="review-header">
-      感想
+      <%= image_tag 'review_white.png', :width => '20' %>　感想
     </div>
     <div class="review-body">
-      <%= @review.review %>
+      <% if @review.user_id == current_user.id || @added %>
+        <%= simple_format(h(@review.review)) %>
+      <% else %>
+        <div class="unreaded">
+          <p>まだこの本を読んでいないため、感想を見ることができません</p>
+          <% if !@readed %>
+            <%= link_to '本棚に追加する', add_bookshelf_path(@review.book_id), class: 'btn' %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

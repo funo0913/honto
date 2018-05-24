@@ -57,10 +57,16 @@ div.alert{
 }
 header{
   background-color: $dark-grean;
+  position: relative;
+  height: 50px;
   color: #fff;
   .logo{
     margin: 8px 10px;
-
+    float: left;
+  }
+  .user-info{
+    margin-top:8px;
+    font-size: 12px;
   }
 }
 
@@ -203,7 +209,7 @@ footer{
 //////////////////
 .menu{
   height: 50px;
-  background-color: $orrange;
+  border-bottom:dashed 3px $orrange;
   width: 100%;
   padding-top: 10px;
 }

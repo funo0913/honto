@@ -17,10 +17,12 @@
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
           </div>
-          <div class="col-lg-5 user-info">
-            <%= "ログインユーザ　#{current_user.nickname}　さん　最終ログイン　#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%>
-            <%= link_to '　sign out',destroy_user_session_path, method: :delete %>
-          </div>
+          <% if user_signed_in? %>
+            <div class="col-lg-5 user-info">
+              <%= "ログインユーザ　#{current_user.nickname}　さん　最終ログイン　#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%>
+              <%= link_to '　sign out',destroy_user_session_path, method: :delete %>
+            </div>
+          <% end %>
         </div>
       </header>
       <main>

@@ -7,6 +7,9 @@ $orrange:#f9a828;
 $light-orrange:#ffe2b5;
 $gray:#ececeb;
 
+//------------------
+// タイル表示用css
+//------------------
 .review {
   margin-bottom:10px;
   background-color: $light-grean;
@@ -23,9 +26,6 @@ $gray:#ececeb;
 .detail{
   font-size: 11px;
 }
-.review-image-col{
-  width: 80px;
-}
 .review-info-col{
   margin:10px 0 0 0;
   float: left;
@@ -33,4 +33,50 @@ $gray:#ececeb;
     color: $dark-grean;
     margin:5px;
   }
+}
+
+//------------------
+// 感想詳細など
+//------------------
+.review-header,
+.review-body,
+.review-title{
+  width: 90%;
+  margin:0 auto;
+  padding: 10px;
+}
+.review-header{
+  background-color: $dark-grean;
+  color: #fff;
+  margin-top: 10px;
+}
+.review-body{
+  border: solid 1px $dark-grean;
+}
+.review-form{
+  margin:0 auto;
+  width: 100%;
+}
+.review-form-area{
+  height: 300px;
+}
+.review-title{
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color:$dark-grean;
+}
+.book-detail-tbl{
+  margin:0 auto;
+  margin-bottom: 10px;
+  width: 85%;
+}
+.review-buttons{
+  margin: 10px auto;
+  width: 90%;
+  text-align: center;
+}
+.review-radio-label{
+  font-weight: normal;
+  margin-right: 10px;
 }

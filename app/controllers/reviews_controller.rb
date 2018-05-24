@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
-  # 感想の新着一覧表示
+  # 感想の新着一覧表示(最新２０件)
   def index
     @reviews = Review.all
     @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
@@ -16,7 +16,9 @@ class ReviewsController < ApplicationController
 
   # 感想の詳細表示
   def show
+    @review = Review.find(params[:id])
     @search_book = Book.new
+    @statuses = Status.all
   end
 
   # 使わないかもしれない
@@ -32,6 +34,7 @@ class ReviewsController < ApplicationController
     @search_book = Book.new
     @review = Review.find(params[:id])
     @book = Book.find(@review.book_id)
+    @statuses = Status.all
   end
 
 
@@ -45,7 +48,7 @@ class ReviewsController < ApplicationController
         user_id: current_user.id,
         book_id: params[:id],
         status_id: 1,
-        title: 'midoku',
+        title: '',
         innocent_review: '',
         review: ''
       )
@@ -56,24 +59,17 @@ class ReviewsController < ApplicationController
 
   # 感想の編集・更新
   def update
-    respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
+        redirect_to @review, notice: '感想を更新しました'
       else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # 感想の破棄
   def destroy
     @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to reviews_url, notice: '本棚から削除しました'
   end
 
   private

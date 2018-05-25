@@ -48,7 +48,7 @@
       <%= image_tag 'review_white.png', :width => '20' %>　感想
     </div>
     <div class="review-body">
-      <% if @review.user_id == current_user.id || @added %>
+      <% if @review.user_id == current_user.id ||( @added && @readed) %>
         <%= simple_format(h(@review.review)) %>
       <% else %>
         <div class="unreaded">
@@ -67,5 +67,9 @@
       <%= link_to '感想を編集する', edit_review_path(@review),class: 'btn' %>
     <% end %>
     <%= link_to '戻る', reviews_path ,class: 'btn' %>
+    <% if @review.user.id != current_user.id %>
+    <br>
+    <%= link_to '通報する', warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn' %>
+    <% end %>
   </div>
 </div>

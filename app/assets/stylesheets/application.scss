@@ -49,9 +49,16 @@ li{
 .center{
   text-align: center;
 }
-div.alert{
+
+div.alert,div.notice{
   padding:3px 10px;
   margin:3px 5px;
+}
+div.alert{
+  color: $orrange;
+  background-color: $light-orrange;
+}
+div.notice{
   color: $orrange;
   background-color: $light-orrange;
 }

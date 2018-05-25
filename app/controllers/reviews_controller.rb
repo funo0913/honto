@@ -30,11 +30,13 @@ class ReviewsController < ApplicationController
     if @review.user_id == current_user.id
       #自分の感想
     else
-      mine_reviews = Review.where(user_id: current_user.id).where(book_id: @review.book.id)
-      if mine_reviews.count < 1
+      mine_reviews = Review.find_by(user_id: current_user.id,book_id: @review.book.id)
+      if mine_reviews.nil?
+        #本棚に追加されていない状態
         @added = false
       else
         @added = true
+        #読み終わっているか？
         if mine_reviews.status_id == 3
           @readed = true
         else
@@ -42,7 +44,6 @@ class ReviewsController < ApplicationController
         end
       end
     end
-
     @search_book = Book.new
     @statuses = Status.all
   end
@@ -54,9 +55,6 @@ class ReviewsController < ApplicationController
 
   # 感想の編集・更新
   def edit
-    if @isAdded
-      flash[:isAdded] = '登録済みです'
-    end
     @search_book = Book.new
     @review = Review.find(params[:id])
     @book = Book.find(@review.book_id)

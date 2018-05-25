@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  after_action :delete_after_sign_in_message, only: [:destroy]
 
   # GET /resource/sign_in
   # def new
@@ -20,6 +20,13 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     reviews_path
+  end
+
+  #ログアウト後に表示するメッセージを削除
+  def delete_after_sign_in_message
+    if flash[:notice].present?
+      flash.delete(:notice)
+    end
   end
 
   # protected

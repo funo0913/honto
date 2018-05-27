@@ -1,5 +1,10 @@
 <h3>my bookshelf</h3>
-
+<div class='search'>
+  <%= search_form_for @q,url: my_bookshelf_path do |f| %>
+    <%= f.collection_radio_buttons :status_id_eq,Status.all ,:id,:status_name %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
 <div id="box">
   <% @reviews.each do |review| %>
     <%= link_to  review_path(id: review.id) do %>

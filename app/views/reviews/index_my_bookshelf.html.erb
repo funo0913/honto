@@ -1,6 +1,7 @@
 <h3>my bookshelf</h3>
 <div class='search'>
   <%= search_form_for @q,url: my_bookshelf_path do |f| %>
+    <%= f.radio_button :status_id_eq,'',:checked => true %><%= f.label 'すべて' %>
     <%= f.collection_radio_buttons :status_id_eq,Status.all ,:id,:status_name %>
     <%= f.submit "検索" %>
   <% end %>

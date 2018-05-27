@@ -13,8 +13,7 @@ class ReviewsController < ApplicationController
 
   # 自分の本棚の一覧表示
   def index_my_bookshelf
-    # @reviews = Review.where(user_id: current_user.id).page(params[:page]).per(10)
-    @q = Review.search(search_params)
+    @q = Review.search(params[:q])
     @reviews = @q.result.where(user_id: current_user.id).page(params[:page]).per(10)
   end
 
@@ -115,9 +114,9 @@ class ReviewsController < ApplicationController
                                      :warning
                                    )
     end
-    def search_params
-      debugger
-      params.require(:q).permit(:status_id_eq)
-    end
+    # def search_params
+    #   debugger
+    #   params.require(:q).permit(:status_id_eq)
+    # end
 
 end

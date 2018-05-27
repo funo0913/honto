@@ -1,2 +1,29 @@
-<h1>WarningReport#index</h1>
-<p>Find me in app/views/warning_report/index.html.erb</p>
+<div class="row">
+  <div class="col-lg-12">
+  <h4>通報一覧</h4>
+  <table class="table table-border">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>タイトル</td>
+        <td>通報者(id)</td>
+        <td>状況</td>
+        <td>作成日</td>
+        <td>更新日</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @warning_reports.each do |warning|  %>
+        <tr>
+          <td><%= link_to warning.id,warning_report_path(warning.id) %></td>
+          <td><%= warning.review.title %></td>
+          <td><%= "#{warning.user.nickname}(#{warning.user_id})" %></td>
+          <td><%= (warning.dealt) ? "対応済み" : "未対応" %></td>
+          <td><%= warning.created_at %></td>
+          <td><%= warning.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

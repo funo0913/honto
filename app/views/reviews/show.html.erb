@@ -22,52 +22,69 @@
     </div>
   </div>
 </div>
-<% if @review.user.id == current_user.id %>
+<% if @warning && @review.user.id != current_user.id %>
   <div class="row">
     <div class="col-lg-12">
       <div class="review-title">
-        <h4><%= @review.status.status_name %></h4>
+        <p>この感想は不適切な内容を含んでいるため非表示にされています。</p>
       </div>
     </div>
   </div>
-<% end %>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="review-title">
-      <%= @review.title %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="review-buttons">
+        <%= link_to '戻る', reviews_path ,class: 'btn' %>
+      </div>
     </div>
-    <div class="review-header">
-      <%= image_tag 'in_review_white.png', :width => '20' %>　ねたばれなし
-    </div>
-    <div class="review-body">
-      <%= simple_format(h(@review.innocent_review)) %>
-    </div>
-    <div class="review-header">
-      <%= image_tag 'review_white.png', :width => '20' %>　感想
-    </div>
-    <div class="review-body">
-      <% if @review.user_id == current_user.id ||( @added && @readed) %>
-        <%= simple_format(h(@review.review)) %>
-      <% else %>
-        <div class="unreaded">
-          <p>まだこの本を読んでいないため、感想を見ることができません</p>
-          <% if !@readed %>
-            <%= link_to '本棚に追加する', add_bookshelf_path(@review.book_id), class: 'btn' %>
-          <% end %>
+  </div>
+<% else %>
+  <% if @review.user.id == current_user.id %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="review-title">
+          <h4><%= @review.status.status_name %></h4>
         </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="review-title">
+        <%= @review.title %>
+      </div>
+      <div class="review-header">
+        <%= image_tag 'in_review_white.png', :width => '20' %>　ねたばれなし
+      </div>
+      <div class="review-body">
+        <%= simple_format(h(@review.innocent_review)) %>
+      </div>
+      <div class="review-header">
+        <%= image_tag 'review_white.png', :width => '20' %>　感想
+      </div>
+      <div class="review-body">
+        <% if @review.user_id == current_user.id ||( @added && @readed) %>
+          <%= simple_format(h(@review.review)) %>
+        <% else %>
+          <div class="unreaded">
+            <p>まだこの本を読んでいないため、感想を見ることができません</p>
+            <% if !@readed %>
+              <%= link_to '本棚に追加する', add_bookshelf_path(@review.book_id), class: 'btn' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="review-buttons">
+      <% if @review.user.id == current_user.id %>
+        <%= link_to '感想を編集する', edit_review_path(@review),class: 'btn' %>
+      <% end %>
+      <%= link_to '戻る', reviews_path ,class: 'btn' %>
+      <% if @review.user.id != current_user.id %>
+      <br>
+      <%= link_to '通報する', create_warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn' %>
       <% end %>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="review-buttons">
-    <% if @review.user.id == current_user.id %>
-      <%= link_to '感想を編集する', edit_review_path(@review),class: 'btn' %>
-    <% end %>
-    <%= link_to '戻る', reviews_path ,class: 'btn' %>
-    <% if @review.user.id != current_user.id %>
-    <br>
-    <%= link_to '通報する', warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn' %>
-    <% end %>
-  </div>
-</div>
+<% end %>

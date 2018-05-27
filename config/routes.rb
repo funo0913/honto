@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   get 'recommend/index'
 
-  get 'warning_report/index'
-  get 'warning_report/create/:id', to: 'warning_report#create', as: 'warning_report'
+  resources :warning_report, only:[:index,:edit,:show,:update,:destroy]
+  get 'warning_report/create/:id', to: 'warning_report#create', as: 'create_warning_report'
 
   get 'books/search', to: 'books#search'
   resources :books

@@ -24,8 +24,8 @@ class Users::SessionsController < Devise::SessionsController
 
   #ログアウト後に表示するメッセージを削除
   def delete_after_sign_in_message
-    if flash[:notice].present?
-      flash.delete(:notice)
+    if flash[:alert].present?
+      flash.delete(:alert)
     end
   end
 

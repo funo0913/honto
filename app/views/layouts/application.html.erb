@@ -33,7 +33,7 @@
               <%= link_to '　new arrivals',reviews_path %>
               <%= link_to '　my bookshelf',my_bookshelf_path %>
               <%= link_to '　reccomend','#' %>
-              <%= link_to '　setting','#' %>
+              <%= link_to '　setting',user_path(current_user.id) %>
             </div>
             <div class="col-lg-3">
               <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "alert #{key}") %> 
+          <%= content_tag(:div, value, class: "alert #{key}") %>
         <% end %>
         <%= yield %>
       </main>

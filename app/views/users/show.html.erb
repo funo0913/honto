@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h3>user info</h3>
+    <div class="user-infos">
+      <div class="userinfo-header">
+        <%= image_tag 'user_white.png', :width => '20' %>　ユーザー情報
+      </div>
+      <div class="userinfo-body">
+        <table class="user-detail-tbl">
+          <tr>
+            <td>ニックネーム</td>
+            <td><%= @user.nickname %>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+        <div class="userinfo-buttons">
+          <%= link_to '登録情報・パスワードを修正する',edit_user_registration_path,class: "btn" %>
+        </div>
+      </div>
+    </div>
+    <div class="user-withdrawal">
+      <div class="userinfo-header">
+        <%= image_tag 'withdrawal_white.png', :width => '20' %>　退会する
+      </div>
+      <div class="userinfo-body">
+        <p>現在の情報をすべて破棄して、サービスを退会します</p>
+        <div class="userinfo-buttons">
+          <%= link_to '退会する',user_registration_path,method: 'DELETE',data: { confirm: "退会するとデータは完全に破棄されます。本当に退会しますか?" },class: "btn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

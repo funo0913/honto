@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h4>ユーザー情報編集</h4>
+    <%= form_for(@admins_user,:url => admins_user_path,:method => 'PATCH') do |f| %>
+    <table class="table">
+      <tr>
+        <td>ニックネーム</td>
+        <td><%= f.text_field :nickname %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= f.text_field :email %></td>
+      </tr>
+    </table>
+    <%= f.submit '更新',class: "btn"  %>
+    <% end %>
+    <%= link_to 'Show', @admins_user %> |
+    <%= link_to 'Back', admins_users_path %>
+  </div>
+</div>

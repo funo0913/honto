@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     end
     # topページ表示時にセッション情報をすべて破棄する
     reset_session
-    
+
     # LPの表示
     render layout: false
   end
@@ -14,4 +14,5 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @search_book = Book.new
   end
+
 end

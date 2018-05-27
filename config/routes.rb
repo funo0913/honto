@@ -29,5 +29,8 @@ Rails.application.routes.draw do
 
   #管理サイト
   get 'admins/top', to: 'admins#top', as: 'admin_top'
+  namespace :admins do
+    resources :users, only:[:index,:edit,:show,:update,:destroy]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   resources :reviews
 
   resources :users , only:[:show]
+
+  #管理サイト
+  get 'admins/top', to: 'admins#top', as: 'admin_top'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

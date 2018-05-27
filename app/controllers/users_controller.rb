@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     if flash[:alert].present?
       flash.delete(:alert)
     end
+    # topページ表示時にセッション情報をすべて破棄する
+    reset_session
+    
     # LPの表示
     render layout: false
   end

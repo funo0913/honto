@@ -12,13 +12,13 @@
     <div class="container">
       <header>
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-6">
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
           </div>
           <% if user_signed_in? %>
-            <div class="col-lg-5 user-info">
+            <div class="col-lg-6 user-info">
               <%= "ログインユーザ　#{current_user.nickname}　さん　最終ログイン　#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%>
               <%= link_to '　sign out',destroy_user_session_path, method: :delete %>
             </div>

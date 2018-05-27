@@ -1,3 +1,27 @@
 // Place all the styles related to the admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$dark-grean: #07617d;
+$light-grean: #f4f4f4;
+$orrange:#f9a828;
+$light-orrange:#ffe2b5;
+$gray:#ececeb;
+
+.warning_reports_summary{
+  margin: 20px auto;
+  width: 90%;
+}
+.summary-header,
+.summary-body{
+  width: 90%;
+  margin:0 auto;
+  padding: 10px;
+}
+.summary-header{
+  background-color: $dark-grean;
+  color: #fff;
+  margin-top: 10px;
+}
+.summary-body{
+  border: solid 1px $dark-grean;
+}

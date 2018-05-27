@@ -25,6 +25,10 @@ class ReviewsController < ApplicationController
 
   # 感想の詳細表示
   def show
+    # 通報処理済みの場合は表示させない
+    if @review.warning
+      @warning = true;
+    end
     # 自分の感想か、他人の感想か？
     if @review.user_id == current_user.id
       #自分の感想

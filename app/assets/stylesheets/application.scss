@@ -38,11 +38,17 @@ html,body,p{
   margin: 0;
   font-family: Mitr,'Sawarabi Gothic';
 }
+.narrow{
+  display: none;
+}
 a,a:hover,a:visited{
   text-decoration: none;
 }
 a:hover{
   background-color: #fff !important;
+}
+h3,h4,label{
+  color:$dark-grean;
 }
 li{
   list-style: none;
@@ -59,6 +65,11 @@ div.alert{
   color: $orrange;
   background-color: $light-orrange;
 }
+.field_with_errors{
+  padding: 1px;
+  background-color: $orrange;
+}
+
 header{
   background-color: $dark-grean;
   position: relative;
@@ -81,6 +92,49 @@ footer{
   padding:30px;
   bottom: 0;
 }
+
+// ボタン
+.btn{
+  padding:6px 12px;
+  margin: 4px;
+  border-radius: 4px;
+  width: 150px;
+}
+.small-btn{
+  width: 100px;
+}
+.thin-btn{
+  padding:1px 8px;
+  margin:2px;
+  height: 20px;
+  font-size: 12px;
+}
+.orrange-btn{
+  background-color: $orrange;
+  color: #fff;
+}
+a:hover.orrange-btn  {
+  background-color: #fff;
+  border:solid 1px $orrange !important;
+  color: $orrange !important;
+}
+.green-btn{
+  background-color: $dark-grean;
+  color: #fff !important;
+}
+a:hover.green-btn  {
+  background-color: #fff;
+  border:solid 1px $dark-grean!important;
+  color: $dark-grean !important;
+}
+
+// テキストボックス類
+input[type="text"],input[type="email"],input[type="password"]
+{
+  border:solid 1px $dark-grean;
+  border-radius: 4px;
+}
+
 //////////////////
 // LP画面
 //////////////////
@@ -105,12 +159,6 @@ footer{
   text-align: center;
   padding:10px;
   background-color: $dark-grean;
-  .signin-btn{
-    background-color: $orrange;
-  }
-  .signup-btn{
-    background-color: $gray;
-  }
 }
 .top-introduction{
   text-align: center;
@@ -118,12 +166,12 @@ footer{
   color: $orrange;
 }
 .intro-subject{
-  height: 200px;
   width: 80%;
   margin: 0 auto;
   border-radius: 5px;
   margin-top: 120px;
   margin-bottom: 120px;
+  display: block;
 
   //------------------
   // invew
@@ -188,9 +236,11 @@ footer{
   text-align: center;
   color: $orrange;
   margin: 40px auto;
+  margin-bottom:px;
   h5{
     text-decoration: underline;
   }
+  display: block;
 }
 .intro-image{
   background-color: $orrange;
@@ -252,5 +302,32 @@ footer{
   p{
     color: $dark-grean;
     margin:5px;
+  }
+}
+
+//------------------------
+// スマホ表示レスポンシブ設定
+//------------------------
+@media screen and (max-width:425px) {
+  .alert{
+    font-size: 11px;
+  }
+  footer{
+    .nomal{
+      display: none;
+    }
+    .narrow{
+      display: block;
+    }
+    li{
+      list-style: disc;
+      font-size: 12px;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
+  .top-logo{
+    background-color: #fff;
   }
 }

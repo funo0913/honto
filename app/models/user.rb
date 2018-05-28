@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :recommends
   has_many :reviews
   has_many :warning_reports
+
+  #Validation
+  validates :nickname, presence: true
+  
 end

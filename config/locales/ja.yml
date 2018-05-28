@@ -1,4 +1,13 @@
 ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        nickname: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
   views:
       pagination:
         first: "&laquo;"

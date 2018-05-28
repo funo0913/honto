@@ -1,36 +1,38 @@
 <div class="row">
   <div class="col-lg-12">
-    <h2>Sign up</h2>
+    <%= devise_error_messages %>
+    <h3>新規登録</h3>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
-
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label 'メールアドレス' %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
       <div class="field">
-        <%= f.label :nickname %><br />
+        <%= f.label 'ニックネーム' %><br />
         <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
       </div>
       <div class="field">
-        <%= f.label :password %>
+        <%= f.label 'パスワード' %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(<%= @minimum_password_length %>文字以上)</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label 'パスワード　確認' %><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "登録", class: "btn orrange-btn" %>
       </div>
     <% end %>
 
-    <%= render "users/shared/links" %>
+    <div class="actions">
+      <%= link_to "ログインはこちら",new_user_session_path,class:'btn thin-btn orrange-btn' %>
+      <%= link_to "TOP",root_path,class:'btn thin-btn small-btn green-btn' %>
+    </div>
   </div>
 </div>

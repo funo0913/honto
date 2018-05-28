@@ -80,6 +80,8 @@ header{
     margin: 8px 10px;
     float: left;
   }
+  // メニューに冊数を表示するための記述
+  // 要リファクタリング
   .last-book{
     margin: 0;
     margin-left: -10px;
@@ -143,6 +145,17 @@ a:hover.green-btn  {
   background-color: #fff;
   border:solid 1px $dark-grean!important;
   color: $dark-grean !important;
+}
+
+.warning-btn{
+  background-color: $orrange;
+  border:solid 1px $dark-grean;
+  color: $dark-grean;
+}
+a:hover.warning-btn  {
+  background-color: $dark-grean !important;
+  border:solid 1px $orrange!important;
+  color: $orrange !important;
 }
 
 // テキストボックス類

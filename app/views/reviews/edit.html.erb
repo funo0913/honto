@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <div class="review-title">
-    </div>
+    <h3>edit review</h3>
     <div class="review-header">
       書籍情報
     </div>
@@ -65,9 +64,9 @@
   </div>
   <div class="row">
     <div class="review-buttons">
-      <%= f.submit '感想の更新', class: "btn" %>
-      <%= link_to '本棚から削除する', review_path,method: 'DELETE',data: {confirm: "本当に削除しますか？"} , class: 'btn' %>
-      <%= link_to '本棚に戻る', my_bookshelf_path, class: 'btn' %>
+      <%= f.submit '感想の更新', class: "btn orrange-btn" %>
+      <%= link_to '本棚に戻る', my_bookshelf_path, class: 'btn small-btn green-btn' %>
+      <%= link_to '本棚から削除する', review_path,method: 'DELETE',data: {confirm: "本当に削除しますか？"} , class: 'btn warning-btn' %>
     </div>
   </div>
 <% end %>

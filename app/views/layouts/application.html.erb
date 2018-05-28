@@ -93,7 +93,7 @@
                   <p>最終ログイン</p>
                   <p>　<%= "#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%></p>
                 </div>
-                <%= link_to 'sign out',destroy_user_session_path, method: :delete,class: "btn small-btn thin-btn orrange-btn" %>
+                <%= link_to 'ログアウト',destroy_user_session_path, method: :delete,class: "btn small-btn thin-btn orrange-btn" %>
               <% end %>
             </div>
           </div>

@@ -3,49 +3,103 @@
   <head>
     <title>hon to</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
-
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <header>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-10">
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
-          </div>
-          <% if user_signed_in? %>
-            <div class="col-lg-6 user-info">
-              <%= "ログインユーザ　#{current_user.nickname}　さん　最終ログイン　#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%>
-              <%= link_to '　sign out',destroy_user_session_path, method: :delete %>
-            </div>
-          <% end %>
-        </div>
-      </header>
-      <main>
-        <div class="menu">
-          <div class="row">
-            <% if user_signed_in? %>
-            <div class="col-lg-9">
-              <%= link_to '　new arrivals',reviews_path %>
-              <%= link_to '　my bookshelf',my_bookshelf_path %>
-              <%= link_to '　reccomend','#' %>
-              <%= link_to '　setting',user_path(current_user.id) %>
-            </div>
-            <div class="col-lg-3">
-              <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
-                <%= f.text_field :search_word %>
-                <%= f.submit 'getbook' %>
+            <!-- 要整理 -->
+            <!-- <div class="books-count">
+              <% if @unread == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@unread.nil? && @unread > 1 %>
+                <% for i in 1..@unread do %>
+                  <% if i == @unread %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
               <% end %>
-            </div>
+              　
+              <% if @reading == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@reading.nil? && @reading > 1 %>
+                <% for i in 1..@reading do %>
+                  <% if i == @reading %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              　
+              <% if @readed == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@readed.nil? && @readed > 1 %>
+                <% for i in 1..@readed do %>
+                  <% if i == @readed %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div> -->
+          </div>
+          <div class="col-lg-2 right">
+            <% if user_signed_in? %>
+              <div class="switch op"><%= image_tag 'menu.png',:width => "20" %></div>
             <% end %>
           </div>
         </div>
+      </header>
+      <main>
+        <input id="open" type="checkbox">
+        <div class="menu">
+          <div class="row">
+            <div class="col-lg-12">
+              <p class="switch cl"><%= image_tag 'close.png',:width => "20" %></p>
+              <% if user_signed_in? %>
+                <%= link_to 'new arrivals',reviews_path %> <br>
+                <%= link_to 'my bookshelf',my_bookshelf_path %><br>
+                <%= link_to 'reccomend','#' %><br>
+                <%= link_to 'setting',user_path(current_user.id) %><br>
+                <hr>
+                <div class="search-books">
+                  <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
+                    <p>書籍検索</p>
+                    <%= f.text_field :search_word %>
+                    <%= f.submit '検索' , class: "btn small-btn thin-btn orrange-btn"%>
+                  <% end %>
+                </div>
+                <hr>
+                <div class="login-info">
+                  <p>ログインユーザ</p>
+                  <p>　<%= "#{current_user.nickname}　さん" %></p>
+                  <p>最終ログイン</p>
+                  <p>　<%= "#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%></p>
+                </div>
+                <%= link_to 'ログアウト',destroy_user_session_path, method: :delete,class: "btn small-btn thin-btn orrange-btn" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
         <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "alert #{key}") %>
+          <%= content_tag(:div, value, class: "#{key}") %>
         <% end %>
         <%= yield %>
       </main>
@@ -55,3 +109,14 @@
     </div>
   </body>
 </html>
+<script>
+$(function() {
+  $('.switch').click(function() {
+    if ($('#open').prop('checked')) {
+      $("#open").prop("checked",false);
+    } else {
+      $("#open").prop("checked",true);
+    }
+  });
+});
+</script>

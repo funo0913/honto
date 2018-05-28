@@ -5,7 +5,7 @@
     </div>
     <div class="review-body">
       <h4><%= @review.book.title %></h4>
-      <table class="book-detail-tbl">
+      <table class="book-detail-tbl nomal">
         <tr>
           <td>著者</td>
           <td><%= @review.book.author %></td>
@@ -16,6 +16,32 @@
           <td>出版社</td>
           <td><%= @review.book.publisher %></td>
           <td>ISBN</td>
+          <td><%= @review.book.isbn %></td>
+        </tr>
+      </table>
+      <table class="book-detail-tbl narrow">
+        <tr>
+          <th>著者</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.author %></td>
+        </tr>
+        <tr>
+          <th>出版時期</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.publication.strftime("%Y/%m") if !@review.book.publication.nil? %></td>
+        </tr>
+        <tr>
+          <th>出版社</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.publisher %></td>
+        </tr>
+        <tr>
+          <th>ISBN</th>
+        </tr>
+        <tr>
           <td><%= @review.book.isbn %></td>
         </tr>
       </table>
@@ -33,7 +59,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="review-buttons">
-        <%= link_to '戻る', reviews_path ,class: 'btn' %>
+        <%= link_to '戻る', reviews_path ,class: 'btn ' %>
       </div>
     </div>
   </div>
@@ -68,7 +94,7 @@
           <div class="unreaded">
             <p>まだこの本を読んでいないため、感想を見ることができません</p>
             <% if !@readed %>
-              <%= link_to '本棚に追加する', add_bookshelf_path(@review.book_id), class: 'btn' %>
+              <%= link_to '本棚に追加する', add_bookshelf_path(@review.book_id), class: 'btn orrange-btn' %>
             <% end %>
           </div>
         <% end %>
@@ -78,12 +104,13 @@
   <div class="row">
     <div class="review-buttons">
       <% if @review.user.id == current_user.id %>
-        <%= link_to '感想を編集する', edit_review_path(@review),class: 'btn' %>
+        <%= link_to '感想を編集する', edit_review_path(@review),class: 'btn orrange-btn' %>
       <% end %>
-      <%= link_to '戻る', reviews_path ,class: 'btn' %>
+      <%= link_to '戻る', reviews_path ,class: 'btn green-btn small-btn' %>
       <% if @review.user.id != current_user.id %>
       <br>
-      <%= link_to '通報する', create_warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn' %>
+      <br>
+      <%= link_to '通報する', create_warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn warning-btn' %>
       <% end %>
     </div>
   </div>

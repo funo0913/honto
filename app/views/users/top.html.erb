@@ -22,8 +22,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="top-menu">
-            <%= link_to "login", new_user_session_path, class:"btn signin-btn"%>
-            <%= link_to "signup", new_user_registration_path, class:"btn signup-btn"%>
+            <%= link_to "login", new_user_session_path, class:"btn orrange-btn"%>
+            <%= link_to "signup", new_user_registration_path, class:"btn orrange-btn"%>
           </div>
         </div>
       </div>
@@ -39,21 +39,21 @@
                 <h5>　読書記録として　</h5>
                 日々の読書を記録しましょう<br>
                 これまで読んできた本を積み上げて<br>
-                達成感に浸るのだってありです
+                達成感に浸るのはいかがでしょう
               </div>
             </div>
-            <div class="intro-subject">
+            <div class="row intro-subject">
+              <div class="col-lg-4 intro-image">
+                <%= image_tag 'in_review_white.png', :width => '150' %>
+              </div>
               <div class="col-lg-8 intro-text">
                 <h5>　感想を熱く語りたい　</h5>
                 読み終えた後の気持ちを残しましょう<br>
                 他の既読ユーザーの感想に「分かる」「そうそう」などの<br>
                 リアクションを残して共感を伝えることも
               </div>
-              <div class="col-lg-4 intro-image">
-                <%= image_tag 'in_review_white.png', :width => '150' %>
-              </div>
             </div>
-            <div class="intro-subject">
+            <div class="row intro-subject">
               <div class="col-lg-4 intro-image">
                 <%= image_tag 'bookshelf_2_white.png', :width => '150' %>
               </div>
@@ -78,7 +78,7 @@ $(function() {
 			$(this).stop().addClass('inview');
 		}
 		else{
-			$(this).stop().removeClass('inview');
+			// $(this).stop().removeClass('inview');
 		}
 	});
 });

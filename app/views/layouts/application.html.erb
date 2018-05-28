@@ -9,39 +9,48 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <header>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-11">
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
           </div>
-          <% if user_signed_in? %>
-            <div class="col-lg-6 user-info">
-              <%= "ログインユーザ　#{current_user.nickname}　さん　最終ログイン　#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%>
-              <%= link_to '　sign out',destroy_user_session_path, method: :delete %>
-            </div>
-          <% end %>
+          <div class="col-lg-1 right">
+            <p class="switch op"><%= image_tag 'menu.png',:width => "20" %></p>
+          </div>
         </div>
       </header>
       <main>
+        <input id="open" type="checkbox">
         <div class="menu">
           <div class="row">
-            <% if user_signed_in? %>
-            <div class="col-lg-9">
-              <%= link_to '　new arrivals',reviews_path %>
-              <%= link_to '　my bookshelf',my_bookshelf_path %>
-              <%= link_to '　reccomend','#' %>
-              <%= link_to '　setting',user_path(current_user.id) %>
-            </div>
-            <div class="col-lg-3">
-              <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
-                <%= f.text_field :search_word %>
-                <%= f.submit 'getbook' %>
+            <div class="col-lg-12">
+              <p class="switch cl"><%= image_tag 'close.png',:width => "20" %></p>
+              <% if user_signed_in? %>
+                <%= link_to 'new arrivals',reviews_path %> <br>
+                <%= link_to 'my bookshelf',my_bookshelf_path %><br>
+                <%= link_to 'reccomend','#' %><br>
+                <%= link_to 'setting',user_path(current_user.id) %><br>
+                <hr>
+                <div class="search-books">
+                  <%= form_for(@search_book,url: books_search_path, method: 'get') do |f| %>
+                    <p>書籍検索</p>
+                    <%= f.text_field :search_word %>
+                    <%= f.submit '検索' , class: "btn small-btn thin-btn orrange-btn"%>
+                  <% end %>
+                </div>
+                <hr>
+                <div class="login-info">
+                  <p>ログインユーザ</p>
+                  <p>　<%= "#{current_user.nickname}　さん" %></p>
+                  <p>最終ログイン</p>
+                  <p>　<%= "#{current_user.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S")}"%></p>
+                </div>
+                <%= link_to 'sign out',destroy_user_session_path, method: :delete,class: "btn small-btn thin-btn orrange-btn" %>
               <% end %>
             </div>
-            <% end %>
           </div>
         </div>
         <% flash.each do |key, value| %>
@@ -55,3 +64,14 @@
     </div>
   </body>
 </html>
+<script>
+$(function() {
+  $('.switch').click(function() {
+    if ($('#open').prop('checked')) {
+      $("#open").prop("checked",false);
+    } else {
+      $("#open").prop("checked",true);
+    }
+  });
+});
+</script>

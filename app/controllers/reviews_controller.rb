@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_brank_book, only:[:index, :index_my_bookshelf,:index_search_review,:show,:edit]
   before_action :set_status, only:[:index_my_bookshelf,:edit]
+  before_action :set_mybooks
 
   # 感想の新着一覧表示(最新２０件)
   def index
@@ -9,6 +10,7 @@ class ReviewsController < ApplicationController
     if !@reviews.nil?
       @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
     end
+    set_mybooks
   end
 
   # 自分の本棚の一覧表示
@@ -118,9 +120,10 @@ class ReviewsController < ApplicationController
                                      :warning
                                    )
     end
-    # def search_params
-    #   debugger
-    #   params.require(:q).permit(:status_id_eq)
-    # end
+    def set_mybooks
+      @unread = Review.where(user_id: current_user.id).where(status_id: 1).count
+      @reading = Review.where(user_id: current_user.id).where(status_id: 2).count
+      @readed =  Review.where(user_id: current_user.id).where(status_id: 3).count
+    end
 
 end

@@ -80,9 +80,20 @@ header{
     margin: 8px 10px;
     float: left;
   }
-  .user-info{
-    margin-top:8px;
-    font-size: 12px;
+  .last-book{
+    margin: 0;
+    margin-left: -10px;
+    padding: 0;
+  }
+  .first-book{
+    margin: 0;
+    margin-left: -5px;
+    padding: 0;
+  }
+  .books-count{
+    width: 400px;
+    margin:15px 50px;
+    float:left;
   }
 }
 
@@ -268,12 +279,6 @@ input[type="text"],input[type="email"],input[type="password"]
 //////////////////
 // menu
 //////////////////
-// .menu{
-//   height: 50px;
-//   border-bottom:dashed 3px $orrange;
-//   width: 100%;
-//   padding-top: 10px;
-// }
 .menu{
   position: fixed;
   top: 0;

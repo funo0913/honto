@@ -7,18 +7,61 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
-
   <body>
     <div class="container-fluid">
       <header>
         <div class="row">
-          <div class="col-lg-11">
+          <div class="col-lg-10">
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
+            <!-- 要整理 -->
+            <div class="books-count">
+              <% if @unread == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@unread.nil? && @unread > 1 %>
+                <% for i in 1..@unread do %>
+                  <% if i == @unread %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              　
+              <% if @reading == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@reading.nil? && @reading > 1 %>
+                <% for i in 1..@reading do %>
+                  <% if i == @reading %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              　
+              <% if @readed == 1 %>
+                <%= image_tag 'single_book_2.png',:width => "20" %>
+              <% elsif !@readed.nil? && @readed > 1 %>
+                <% for i in 1..@readed do %>
+                  <% if i == @readed %>
+                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
+                  <% elsif i == 1 %>
+                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
+                  <% else %>
+                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
-          <div class="col-lg-1 right">
-            <p class="switch op"><%= image_tag 'menu.png',:width => "20" %></p>
+          <div class="col-lg-2">
+            <div class="switch op"><%= image_tag 'menu.png',:width => "20" %></div>
           </div>
         </div>
       </header>

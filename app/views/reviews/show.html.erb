@@ -5,7 +5,7 @@
     </div>
     <div class="review-body">
       <h4><%= @review.book.title %></h4>
-      <table class="book-detail-tbl">
+      <table class="book-detail-tbl nomal">
         <tr>
           <td>著者</td>
           <td><%= @review.book.author %></td>
@@ -16,6 +16,32 @@
           <td>出版社</td>
           <td><%= @review.book.publisher %></td>
           <td>ISBN</td>
+          <td><%= @review.book.isbn %></td>
+        </tr>
+      </table>
+      <table class="book-detail-tbl narrow">
+        <tr>
+          <th>著者</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.author %></td>
+        </tr>
+        <tr>
+          <th>出版時期</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.publication.strftime("%Y/%m") if !@review.book.publication.nil? %></td>
+        </tr>
+        <tr>
+          <th>出版社</th>
+        </tr>
+        <tr>
+          <td><%= @review.book.publisher %></td>
+        </tr>
+        <tr>
+          <th>ISBN</th>
+        </tr>
+        <tr>
           <td><%= @review.book.isbn %></td>
         </tr>
       </table>

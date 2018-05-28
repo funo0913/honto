@@ -15,9 +15,13 @@
             <td>メールアドレス</td>
             <td><%= @user.email %></td>
           </tr>
+          <tr>
+            <td>パスワード</td>
+            <td>●●●●●●●●●●</td>
+          </tr>
         </table>
         <div class="userinfo-buttons">
-          <%= link_to '登録情報・パスワードを修正する',edit_user_registration_path,class: "btn" %>
+          <%= link_to '修正する',edit_user_registration_path,class: "btn orrange-btn" %>
         </div>
       </div>
     </div>
@@ -28,7 +32,7 @@
       <div class="userinfo-body">
         <p>現在の情報をすべて破棄して、サービスを退会します</p>
         <div class="userinfo-buttons">
-          <%= link_to '退会する',user_registration_path,method: 'DELETE',data: { confirm: "退会するとデータは完全に破棄されます。本当に退会しますか?" },class: "btn" %>
+          <%= link_to '退会する',user_registration_path,method: 'DELETE',data: { confirm: "退会するとデータは完全に破棄されます。本当に退会しますか?" },class: "btn warning-btn" %>
         </div>
       </div>
     </div>

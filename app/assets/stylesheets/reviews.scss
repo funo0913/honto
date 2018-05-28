@@ -7,6 +7,10 @@ $orrange:#f9a828;
 $light-orrange:#ffe2b5;
 $gray:#ececeb;
 
+
+.narrow{
+  display: none;
+}
 //------------------
 // タイル表示用css
 //------------------
@@ -99,5 +103,14 @@ $gray:#ececeb;
     font-weight: nomal;
     margin-right: 10px;
     margin-left:3px;
+  }
+}
+
+@media screen and (max-width:425px) {
+  .nomal{
+    display: none;
+  }
+  .narrow{
+    display: block;
   }
 }

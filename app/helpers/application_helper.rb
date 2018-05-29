@@ -18,21 +18,21 @@ module ApplicationHelper
     html = ""
     if count == 1
       html += <<-EOF
-        <img height="18" src="/assets/last-book.png" class="last-book" />
+        <img height="18" src="#{asset_path("last-book.png")}" class="last-book" />
       EOF
     elsif !count.nil? && count > 1
       for i in 1..count do
         if i == count
           html += <<-EOF
-          <img height="18" src="/assets/last-book.png" class="last-book"/>
+          <img height="18" src="#{asset_path ("last-book.png")}" class="last-book" />
           EOF
         elsif i == 1
           html += <<-EOF
-          <img height="18" src="/assets/first-book.png" class="first-book"/>
+          <img height="18" src="#{asset_path ("first-book.png")}" class="first-book"/>
           EOF
         else
           html += <<-EOF
-          <img height="18" src="/assets/first-book.png" class="first-book"/>
+          <img height="18" src="#{asset_path ("first-book.png")}" class="first-book"/>
           EOF
         end
       end

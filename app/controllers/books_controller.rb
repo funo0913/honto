@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   require 'net/http'
   BASE_API_URL = "https://www.googleapis.com/books/v1/volumes".freeze
   UNREGISTERED = "未登録".freeze

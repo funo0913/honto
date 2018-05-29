@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def top
     # 残っているメッセージは削除する
     if flash[:alert].present?

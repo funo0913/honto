@@ -80,6 +80,25 @@ header{
     float: left;
   }
 }
+// メニューに冊数を表示するための記述
+// 要リファクタリング
+.books-count{
+  margin-top:20px;
+  margin-left: 10px;
+  tr td{
+    height: 20px;
+    color: $dark-grean;
+  }
+}
+.last-book{
+  margin: 0;
+  padding: 0;
+}
+.first-book{
+  margin: 0;
+  margin-right: -5px;
+  padding: 0;
+}
 
 main{
   width: 90%;

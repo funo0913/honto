@@ -108,9 +108,11 @@
       <% end %>
       <%= link_to '戻る', reviews_path ,class: 'btn green-btn small-btn' %>
       <% if @review.user.id != current_user.id %>
-      <br>
-      <br>
-      <%= link_to '通報する', create_warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn warning-btn' %>
+        <br>
+        <br>
+        <%= link_to create_warning_report_path(@review.id),data:{confirm:'このレビューを不適切な内容として通報しますか？'}, class: 'btn warning-btn'  do %>
+          <%= image_tag 'warning_white.png', :width => '20' %>　通報する
+        <% end %>
       <% end %>
     </div>
   </div>

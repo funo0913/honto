@@ -15,50 +15,13 @@
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
-            <!-- 要整理 -->
-            <!-- <div class="books-count">
-              <% if @unread == 1 %>
-                <%= image_tag 'single_book_2.png',:width => "20" %>
-              <% elsif !@unread.nil? && @unread > 1 %>
-                <% for i in 1..@unread do %>
-                  <% if i == @unread %>
-                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
-                  <% elsif i == 1 %>
-                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
-                  <% else %>
-                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              　
-              <% if @reading == 1 %>
-                <%= image_tag 'single_book_2.png',:width => "20" %>
-              <% elsif !@reading.nil? && @reading > 1 %>
-                <% for i in 1..@reading do %>
-                  <% if i == @reading %>
-                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
-                  <% elsif i == 1 %>
-                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
-                  <% else %>
-                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              　
-              <% if @readed == 1 %>
-                <%= image_tag 'single_book_2.png',:width => "20" %>
-              <% elsif !@readed.nil? && @readed > 1 %>
-                <% for i in 1..@readed do %>
-                  <% if i == @readed %>
-                    <%= image_tag 'single_book_2.png',:width => "20", :class => "last-book" %>
-                  <% elsif i == 1 %>
-                      <%= image_tag 'single_book.png',:height => "20", :class => "last-book"  %>
-                  <% else %>
-                    <%= image_tag 'single_book.png',:height => "20", :class => "first-book"  %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div> -->
+            <% if user_signed_in? %>
+              <div class="books-count">
+                <%= mybookshelf_books(@unread_books) %>
+                <%= mybookshelf_books(@reading_books) %>
+                <%= mybookshelf_books(@readed_books) %>
+              </div>
+            <% end %>
           </div>
           <div class="col-lg-2 right">
             <% if user_signed_in? %>

@@ -79,23 +79,6 @@ header{
     margin: 8px 10px;
     float: left;
   }
-  // メニューに冊数を表示するための記述
-  // 要リファクタリング
-  .last-book{
-    margin: 0;
-    margin-left: -10px;
-    padding: 0;
-  }
-  .first-book{
-    margin: 0;
-    margin-left: -5px;
-    padding: 0;
-  }
-  .books-count{
-    width: 400px;
-    margin:15px 50px;
-    float:left;
-  }
 }
 
 main{

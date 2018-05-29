@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_brank_book, only:[:index, :index_my_bookshelf,:index_search_review,:show,:edit]
   before_action :set_status, only:[:index_my_bookshelf,:edit]
-  # before_action :set_mybooks
+  before_action :set_mybooks
 
   # 感想の新着一覧表示(最新２０件)
   def index
@@ -16,6 +16,7 @@ class ReviewsController < ApplicationController
   def index_my_bookshelf
     @q = Review.search(params[:q])
     @reviews = @q.result.where(user_id: current_user.id).page(params[:page]).per(10)
+    set_mybooks
   end
 
   # 書籍検索結果からの感想一覧表示
@@ -119,10 +120,10 @@ class ReviewsController < ApplicationController
                                      :warning
                                    )
     end
-    # def set_mybooks
-    #   @unread = Review.where(user_id: current_user.id).where(status_id: 1).count
-    #   @reading = Review.where(user_id: current_user.id).where(status_id: 2).count
-    #   @readed =  Review.where(user_id: current_user.id).where(status_id: 3).count
-    # end
+    def set_mybooks
+      @unread_books = Review.where(user_id: current_user.id).where(status_id: 1).count
+      @reading_books = Review.where(user_id: current_user.id).where(status_id: 2).count
+      @readed_books =  Review.where(user_id: current_user.id).where(status_id: 3).count
+    end
 
 end

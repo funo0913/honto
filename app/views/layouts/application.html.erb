@@ -11,7 +11,7 @@
     <div class="container-fluid">
       <header>
         <div class="row">
-          <div class="col-lg-10">
+          <div class="col-lg-10 col-xs-8">
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
@@ -23,7 +23,7 @@
               </div>
             <% end %>
           </div>
-          <div class="col-lg-2 right">
+          <div class="col-lg-2 col-xs-4 right">
             <% if user_signed_in? %>
               <div class="switch op"><%= image_tag 'menu.png',:width => "20" %></div>
             <% end %>

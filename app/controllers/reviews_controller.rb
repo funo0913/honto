@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_brank_book, only:[:index, :index_my_bookshelf,:index_search_review,:show,:edit]
   before_action :set_status, only:[:index_my_bookshelf,:edit]
@@ -6,7 +7,7 @@ class ReviewsController < ApplicationController
 
   # 感想の新着一覧表示(最新２０件)
   def index
-    @reviews = Review.where(status_id: 3).where(private: false).order(:updated_at)
+    @reviews = Review.where(status_id: 3).where(private: false).order(:updated_at).reverse_order
     if !@reviews.nil?
       @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
     end

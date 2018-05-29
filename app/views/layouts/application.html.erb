@@ -15,47 +15,13 @@
             <div class="logo">
                 <%= image_tag 'logo.png',:width => "80" %>
             </div>
-            <div class="books-count">
-             <% if @unread_books == 1 %>
-               <%= image_tag 'last-book.png',:height => "18" %>
-             <% elsif !@unread_books.nil? && @unread_books > 1 %>
-               <% for i in 1..@unread_books do %>
-                 <% if i == @unread_books %>
-                   <%= image_tag 'last-book.png',:height => "18", :class => "last-book" %>
-                 <% elsif i == 1 %>
-                     <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% else %>
-                   <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% end %>
-               <% end %>
-             <% end %>
-             <% if @reading_books == 1 %>
-               <%= image_tag 'last-book.png',:height => "18" %>
-             <% elsif !@reading_books.nil? && @reading_books > 1 %>
-               <% for i in 1..@reading_books do %>
-                 <% if i == @reading_books %>
-                   <%= image_tag 'last-book.png',:height => "18", :class => "last-book" %>
-                 <% elsif i == 1 %>
-                     <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% else %>
-                   <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% end %>
-               <% end %>
-             <% end %>
-             <% if @readed_books == 1 %>
-               <%= image_tag 'last-book.png',:height => "18" %>
-             <% elsif !@readed_books.nil? && @readed_books > 1 %>
-               <% for i in 1..@readed_books do %>
-                 <% if i == @readed_books %>
-                   <%= image_tag 'last-book.png',:height => "18", :class => "last-book" %>
-                 <% elsif i == 1 %>
-                     <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% else %>
-                   <%= image_tag 'first-book.png',:height => "18", :class => "first-book"  %>
-                 <% end %>
-               <% end %>
-             <% end %>
-           </div>
+            <% if user_signed_in? %>
+              <div class="books-count">
+                <%= mybookshelf_books(@unread_books) %>
+                <%= mybookshelf_books(@reading_books) %>
+                <%= mybookshelf_books(@readed_books) %>
+              </div>
+            <% end %>
           </div>
           <div class="col-lg-2 right">
             <% if user_signed_in? %>

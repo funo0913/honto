@@ -1,2 +1,33 @@
-<h1>Recommend#index</h1>
-<p>Find me in app/views/recommend/index.html.erb</p>
+<h3>reccomends</h3>
+<div id="box">
+  <% @recommends.each do |recommend| %>
+    <%= link_to search_review_path(id: recommend.book.tmp_id) do %>
+      <div class="review">
+        <div class="review-info">
+          <div class="review-info-col">
+            <h5> <%= recommend.book.title %></h5>
+            <p>【著者】　<%= recommend.book.author.truncate(20) %></p>
+            <p class="detail">【出版】　<%= recommend.book.publication.strftime("%Y/%m") if !recommend.book.publication.nil?  %></p>
+            <p class="detail">【出版社】<%= recommend.book.publisher.truncate(20) %></p>
+            <p class="detail">【ISBN】　<%= recommend.book.isbn %></p>
+            <p class="detail">【内容】　<%= recommend.book.description.truncate(100) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<script>
+// mazonryの設定
+var $container = $('#box');
+$container.imagesLoaded(function(){
+  $('#box').masonry({
+    itemSelector: '.review',
+    columnWidth: 220,
+    isFitWidth: true,
+    horizontalOrder: true,
+    gutter: 5
+  });
+});
+</script>

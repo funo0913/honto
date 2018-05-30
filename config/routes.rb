@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get 'recommend/index'
+  get 'recommend/index', to: 'recommend#index', as: 'recommends'
 
   resources :warning_report, only:[:index,:edit,:show,:update,:destroy]
   get 'warning_report/create/:id', to: 'warning_report#create', as: 'create_warning_report'

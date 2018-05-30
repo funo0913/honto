@@ -12,9 +12,9 @@
         <td><%= f.text_field :email %></td>
       </tr>
     </table>
-    <%= f.submit '更新',class: "btn"  %>
+    <%= f.submit '更新',class: "btn orrange-btn"  %>
     <% end %>
-    <%= link_to 'Show', @admins_user %> |
-    <%= link_to 'Back', admins_users_path %>
+    <%= link_to '詳細表示', admins_users_path ,class: "btn green-btn small-btn thin-btn"%>
+    <%= link_to 'ユーザー一覧', admins_users_path ,class: "btn green-btn small-btn thin-btn"%>
   </div>
 </div>

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!,onry: [:show]
+  before_action :authenticate_user!,only: [:show]
+
+  def top
     # 残っているメッセージは削除する
     if flash[:alert].present?
       flash.delete(:alert)

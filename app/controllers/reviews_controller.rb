@@ -86,6 +86,7 @@ class ReviewsController < ApplicationController
   # 感想の編集・更新
   def update
       if @review.update(review_params)
+        Recommend.update_recommend(current_user.id)
         redirect_to @review, notice: '感想を更新しました'
       else
         render :edit

@@ -22,7 +22,6 @@ class WarningReportController < ApplicationController
   end
 
   def update
-    debugger
     warning_report = WarningReport.find(params[:id])
     # 感想のwarningフラグを立てる
     review = Review.find(warning_report.review_id)

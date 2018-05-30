@@ -39,7 +39,7 @@
               <% if user_signed_in? %>
                 <%= link_to 'new arrivals',reviews_path %> <br>
                 <%= link_to 'my bookshelf',my_bookshelf_path %><br>
-                <%= link_to 'reccomend','#' %><br>
+                <%= link_to 'reccomend', recommends_path %><br>
                 <%= link_to 'setting',user_path(current_user.id) %><br>
                 <hr>
                 <div class="search-books">

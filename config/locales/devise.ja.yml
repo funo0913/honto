@@ -15,6 +15,7 @@ ja:
   devise:
     failure:
       unauthenticated: 'ログインしてください。'
+      not_found_in_database: "メールアドレスかパスワードが違います。"
 #      unauthenticated: 'You need to sign in or sign up before continuing.'
 #       unconfirmed: '本登録を行ってください。'
 # #      unconfirmed: 'You have to confirm your account before continuing.'

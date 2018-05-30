@@ -20,7 +20,6 @@ class Recommend < ApplicationRecord
     mine_books = Review.where(user_id: cur_user_id).pluck(:book_id)
     recommend_book_ids = []
     other_users.each do |user|
-      debugger
       if user[1] >= 3
         books_id = Review.where.not(book_id: mine_books).where(user_id: user[0]).limit(1)
         if !books_id.length == 0

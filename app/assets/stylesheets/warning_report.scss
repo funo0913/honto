@@ -7,9 +7,15 @@ $orrange:#f9a828;
 $light-orrange:#ffe2b5;
 $gray:#ececeb;
 
+th{
+  font-weight: normal;
+  color:$dark-grean;
+}
 .review-header,
 .review-body,
-.review-title{
+.review-title,
+.warning-header,
+.warning-body{
   width: 90%;
   margin:0 auto;
   padding: 10px;
@@ -21,6 +27,14 @@ $gray:#ececeb;
 }
 .review-body{
   border: solid 1px $dark-grean;
+}
+.warning-header{
+  background-color: $orrange;
+  color: $dark-grean;
+  margin-top: 10px;
+}
+.warning-body{
+  border: solid 1px $orrange;
 }
 .review-title{
   margin-top: 15px;

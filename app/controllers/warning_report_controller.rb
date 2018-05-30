@@ -4,7 +4,7 @@ class WarningReportController < ApplicationController
   layout 'admin_application'
 
   def index
-    @warning_reports = WarningReport.all
+    @warning_reports = WarningReport.all.order(:dealt)
   end
 
   def create
@@ -22,13 +22,14 @@ class WarningReportController < ApplicationController
   end
 
   def update
+    debugger
     warning_report = WarningReport.find(params[:id])
     # 感想のwarningフラグを立てる
     review = Review.find(warning_report.review_id)
     review.warning = true
     review.save
     # 同じ感想に対する通報は一括で対応済みとする
-    warning_reports = WarningReport.where(:review_id => params[:id]).update_all(:dealt => true)
+    warning_reports = WarningReport.where(:review_id => review.id).update_all(:dealt => true)
 
     redirect_to warning_report_index_path
   end

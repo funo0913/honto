@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="review-header">
-          感想タイトル
+          <%= image_tag 'user_white.png', :width => '20' %>　感想タイトル
         </div>
         <div class="review-body">
           <%= @review.title %>
@@ -49,17 +49,17 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <div class="review-header">
-          該当の感想に対する通報総数
+        <div class="warning-header">
+          <%= image_tag 'warning_white.png', :width => '20' %>　該当の感想に対する通報総数
         </div>
-        <div class="review-body">
+        <div class="warning-body">
           <%= "#{@summary} 件" %>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="review-buttons">
-        <%= link_to 'このレビューを削除する', warning_report_path(@review.id),:method => 'PATCH',data:{confirm:'このレビューを不適切な内容として非表示にしますか？'}, class: 'btn' %>
+        <%= link_to '作成ユーザ以外に対して非表示にする', warning_report_path(@warning_report.id),:method => 'PATCH',data:{confirm:'このレビューを不適切な内容として非表示にしますか？'}, class: 'btn wide-btn warning-btn' %>
       </div>
     </div>
   </div>

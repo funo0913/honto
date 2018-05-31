@@ -117,7 +117,55 @@ footer{
     display: none;
   }
 }
-
+// .pagination_box{
+//   display: block;
+//   margin: 0 auto;
+//   width:90%;
+// }
+.pagination{
+  text-align: center;
+  display: block;
+  height: 40px;
+  width: 50%;
+  margin: 20px auto;
+  span{
+    height: 20px;
+    width: 10px;
+    margin:0 3px;
+    padding:5px 2px 5px 8px;
+    text-align: center;
+    background-color: $dark-grean;
+    border-radius: 4px;
+    color:#fff;
+    a{
+      margin:0 auto;
+      padding:5px;
+      color: #fff;
+    }
+    a:hover{
+      color: #fff;
+      background-color: transparent !important;
+    }
+  }
+  span:hover{
+    background-color: $orrange;
+  }
+  .gap{
+    color: $dark-grean;
+    background-color: transparent !important;
+  }
+  .current{
+    padding:5px 5px 5px 10px;
+    background-color: $orrange;
+    color: $dark-grean;
+  }
+  .first,.prev,.next,.last{
+    padding:5px 0px;
+  }
+  .last{
+    padding-right: 8px;
+  }
+}
 // ボタン
 .btn{
   padding:6px 12px;
@@ -427,5 +475,22 @@ input[type="text"],input[type="email"],input[type="password"]
   }
   .top-logo{
     background-color: #fff;
+  }
+  .pagination{
+    width: 100%;
+    span{
+      width: 15px;
+      margin:0 1px;
+      padding:3px 1px 3px 2px;
+    }
+  }
+  .gap{
+    display: none;
+  }
+  .current{
+    width: 12px;
+  }
+  .first,.prev,.next,.last{
+    padding-right: 1px;
   }
 }

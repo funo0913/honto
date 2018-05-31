@@ -21,15 +21,16 @@ class Recommend < ApplicationRecord
     recommend_book_ids = []
     other_users.each do |user|
       if user[1] >= 3
-        books_id = Review.where.not(book_id: mine_books).where(user_id: user[0]).limit(1)
-        if !books_id.length == 0
-            recommend_book_ids << books_id[0].book_id
+        review = Review.where.not(book_id: mine_books).where(user_id: user[0]).limit(1)
+        if !review[0].blank?
+            recommend_book_ids << review[0].book_id
         end
       end
       if recommend_book_ids.length > 20
         break
       end
     end
+    recommend_book_ids.uniq!
     #既存の登録情報を削除する
     User.find(cur_user_id).recommends.destroy_all
     recommend_book_ids.each do |book|

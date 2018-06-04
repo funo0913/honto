@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_mybooks
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_brank_book, only:[:index, :index_my_bookshelf,:index_search_review,:show,:edit]
   before_action :set_status, only:[:index_my_bookshelf,:edit]
-  before_action :set_mybooks
+  before_action :is_mine_review, only:[:edit,:update,:destory]
 
   # 感想の新着一覧表示(最新２０件)
   def index
@@ -126,6 +127,13 @@ class ReviewsController < ApplicationController
       @unread_books = Review.where(user_id: current_user.id).where(status_id: 1).count
       @reading_books = Review.where(user_id: current_user.id).where(status_id: 2).count
       @readed_books =  Review.where(user_id: current_user.id).where(status_id: 3).count
+    end
+    # 自身の感想かのフィルター
+    def is_mine_review
+      review = Review.find(params[:id])
+      if review.user_id != current_user.id
+        redirect_to root_path
+      end
     end
 
 end

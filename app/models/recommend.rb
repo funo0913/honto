@@ -21,7 +21,7 @@ class Recommend < ApplicationRecord
     recommend_book_ids = []
     other_users.each do |user|
       if user[1] >= 3
-        review = Review.where.not(book_id: mine_books).where(user_id: user[0]).limit(1)
+        review = Review.where.not(book_id: mine_books).where(user_id: user[0]).where(status_id: 3).limit(1)
         if !review[0].blank?
             recommend_book_ids << review[0].book_id
         end

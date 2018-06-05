@@ -11,8 +11,11 @@ class AdminsController < ApplicationController
   def new
     @admin = Admin.new
   end
+  def destroy
+    admin = Admin.find(params[:id])
+    admin.delete
+  end
   def create
-    debugger
     admin = Admin.new(admins_admin_params)
     admin.save
   end

@@ -10,11 +10,8 @@
     <%= f.label 'パスワード' %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
-  
+
   <div class="actions">
     <%= f.submit "Log in", class: 'btn small-btn orrange-btn'%>
   </div>
 <% end %>
-<div class="actions">
-  <%= link_to "新規登録はこちら",new_admin_registration_path,class:'btn thin-btn orrange-btn' %>
-</div>

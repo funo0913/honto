@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   #管理サイト
   get 'admins/top', to: 'admins#top', as: 'admin_top'
+  resources :admins
   namespace :admins do
     resources :users, only:[:index,:edit,:show,:update,:destroy]
   end

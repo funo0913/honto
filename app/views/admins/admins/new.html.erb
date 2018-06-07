@@ -1,6 +1,6 @@
 <h3>Admin新規登録</h3>
 
-<%= form_for(@admin,url: admins_path) do |f| %>
+<%= form_for(@admin,url: admins_admins_path,method: 'POST') do |f| %>
 
   <div class="field">
     <%= f.label 'メールアドレス' %><br />

@@ -28,10 +28,17 @@ Rails.application.routes.draw do
   resources :users , only:[:show]
 
   #管理サイト
-  get 'admins/top', to: 'admins#top', as: 'admin_top'
-  resources :admins, only:[:index]
+  get 'admins/top', to: 'admins/admins#top', as: 'admin_top'
+  # get 'admins/index', to: 'admins#index', as: 'admin_index'
+  # get 'admins/new', to: 'admins#new', as: 'admin_new'
+  # post 'admins/create', to: 'admins#create', as: 'admin_create'
+  # get 'admins/edit', to: 'admins#edit', as: 'admin_edit'
+  # post 'admins/update', to: 'admins#update', as: 'admin_update'
+  # delete 'admins/delete', to: 'admins#destroy', as: 'admin_destroy'
+
   namespace :admins do
     resources :users, only:[:index,:edit,:show,:update,:destroy]
+    resources :admins
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

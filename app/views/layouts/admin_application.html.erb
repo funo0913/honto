@@ -40,7 +40,7 @@
           </div>
         </div>
         <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "#{key}") %>
+          <%= content_tag(:div, value[0], class: "#{key}") %>
         <% end %>
         <%= yield %>
       </main>

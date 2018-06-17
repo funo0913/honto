@@ -12,13 +12,14 @@ class Admins::AdminsController < ApplicationController
     @admin = Admin.new
   end
   def create
-    admin = Admin.new(admins_admin_params)
-    if admin.save
+    @admin = Admin.new(admins_admin_params)
+
+    if @admin.save
       flash[:notice] = '管理ユーザを追加しました'
       redirect_to action: 'index'
     else
-      flash[:alert] = 'エラーが発生しました'
-      render 'admins/new'
+      flash[:alert] = @admin.errors.full_messages
+      render 'admins/admins/new'
     end
   end
   def edit
@@ -42,6 +43,6 @@ class Admins::AdminsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def admins_admin_params
-      params.require(:admin).permit(:email,:password)
+      params.require(:admin).permit(:email,:password,:password_confirmation)
     end
 end
